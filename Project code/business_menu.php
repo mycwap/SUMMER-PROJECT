@@ -1,0 +1,200 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunDeli</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/customize.css" rel="stylesheet">
+
+    <script>
+    function add() {
+        var trObj = document.createElement("tr");
+        trObj.id = new Date().getTime();
+        trObj.innerHTML = "<td><input name='meal'/></td><td><input name='price'/></td><td><input name='prepare time'/></td><td><input name='description'/></td><td><input type='button' value='Del' onclick='del(this)'></td>";
+        document.getElementById("tb").appendChild(trObj);
+    }
+
+    function del(obj) {
+        var trId = obj.parentNode.parentNode.id;
+        var trObj = document.getElementById(trId);
+        document.getElementById("tb").removeChild(trObj);
+    }
+    </script> 
+
+  </head>
+
+  <body> 
+  <nav class="navbar navbar-default navbar-customize navbar-fixed-top" role="navigation">
+    
+    <div class="container">
+      <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-FunDeli-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      
+      <a class="navbar-brand" href="home.php"><img class="modal-title" src="image/logo.png"/></a>
+      </div>
+
+       <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1">   
+          <ul class="nav navbar-nav ">                                               
+            
+            <li><a href="#">How It Works</a></li>
+            <b>Welcome:
+              <?php
+              $_COOKIE["sign_email"];
+              echo $_COOKIE["sign_username"];                
+              ?>
+          </b>
+          </ul>
+       </div>
+    </div>
+  </nav>
+
+  <div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <img class="modal-title" src="image/logo.png"/>         
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+              <div class="col-md-6 " >
+                    <form>
+                    <div class="form-group">
+                        <h3 class="login-title">Login:</h3>
+                        
+                        <input class="form-control" id="exampleInputEmail1" placeholder="Enter email" type="email">
+                    </div>
+                    <div class="form-group">
+                      
+                      <input class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
+                    </div>
+                    <div class="checkbox-login">
+                      <label>
+                        <input type="checkbox"> Remember me
+                      </label>
+                      <p style="display:inline; margin-left:30px;"class="text-right"><a style="text-decoration: none;" href="#">Forgot password?</a></p>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+
+                      
+                    </form>
+              </div>
+
+              <div class="col-md-6 signin-area">
+                        <form>
+                        <div class="form-group">
+                          <h3 class="signin-title">Sign in:</h3>
+                          
+                          <input class="form-control" id="exampleInputEmail1" placeholder="Enter email" type="email">
+                        </div>
+                        <div class="form-group">
+                           
+                          <input class="form-control" id="exampleInputPassword1" placeholder="Username" type="type">
+                        </div>
+                        <div class="form-group">
+                           
+                          <input class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
+                        </div>
+                        <div class="form-group">
+                           
+                          <input class="form-control" id="exampleInputPassword1" placeholder="Re-enter password" type="password">
+                        </div>
+                        <div class="checkbox-signin">
+                      <label>
+                        <input type="checkbox"> Keep me logged in to my account
+                      </label>
+                      
+                    </div>
+                        <button type="submit" class="btn btn-default">Sign in</button>
+                        </form>
+              </div>
+           
+        </div>
+      </div>
+        <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn">Close</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+ 
+  <div class="jumbotron">
+     
+      <div class="slogan">
+        <p>We provide</p>
+        <p>On demand, fast lunch food</p>
+      </div>
+
+      <div class="search">
+
+          <form style="margin:0px auto;">
+               <table style="width:737px; margin:0px auto;" border="1">  
+                    <thead>  
+                        <tr>  
+                            <td>Meal name</td>  
+                            <td>Price &euro;</td>  
+                            <td>Prepare time (min)</td>
+                            <td>Description</td>
+                            <td><input type="button" value="Add" onclick="add()" style=""></td>
+                        </tr>  
+                    </thead>  
+                    <tbody id="tb">  
+                        <tr id="1st">  
+                            <td><input type="text"></td>  
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+
+                            <td><input type="button" value="Del" onclick="del(this)" ></td>
+                              
+                        </tr>  
+                    </tbody>  
+                </table>
+            <input type="submit" value="Submit" style="display: block; margin-top:30px;">
+        </form>
+
+      </div>       
+    
+  </div>
+
+
+  <div class="footer">
+    <div class="info">
+      <ul class="footer-nav no_padding  ">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="home3.html">Logout</a></li>
+      </ul>
+    </div>
+       
+    <div class="icon">
+       <ul class="footer-nav no_padding  ">
+        <li><a href="#"><img src="image/facebook_30.gif"></a></li>
+        <li><a href="#"><img src="image/Instagram_30.jpg"></a></li>
+        <li><a href="#"><img src="image/twitter_30.png"></a></li>
+      </ul>
+
+    </div>
+    <div class="copyright">
+        &commat; 2015 FunDeli
+    </div>
+  </div>
+
+
+
+
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

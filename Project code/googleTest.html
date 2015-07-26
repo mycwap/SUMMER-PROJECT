@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>地理位置坐标转换</title>
+    <script src="http://ditu.google.cn/maps?file=api&amp;v=2&amp;key=ABQIAAAAe3YR_oZq7RQougOHlEQYxRTrT8HRiYVHGz6s-cexYhuHznMTnBQJ3hrfCSvSmQ_Fqr80B62kDy8djA&sensor=true"
+        type="text/javascript"></script>
+    <script type="text/javascript">
+        window.g = {};
+        window.$ = function (id) { return document.getElementById(id) };
+        window.onload = function () {
+            if (GBrowserIsCompatible()) {
+                g.map = new GMap2($("map"));
+                //加载google地图控件
+                g.map.addControl(new GLargeMapControl());
+                g.map.addControl(new GMapTypeControl());
+                g.map.addControl(new GScaleControl());
+                //实例化google客户端地理编码类(GClientGeocoder)
+                g.geocoder = new GClientGeocoder();
+
+                g.getCoordinates = function (address) 
+                {
+                    g.geocoder.getLatLng(
+                    address,
+                    function (point) {
+                        if (point) {
+                            alert(point.lat());
+                            alert(point.lng());
+
+                            g.map.setCenter(point, 13);
+                            var marker = new GMarker(point);
+                            g.map.addOverlay(marker);
+                            var info = "<strong>" + address + "</strong><br />坐标: " + point.lat() + "," + point.lng();
+                            $("info").innerHTML = info;
+                            marker.openInfoWindowHtml(info);
+                            marker.__address_info = info;
+                            GEvent.addListener(marker, "click", function () {
+                                g.map.setCenter(this.getLatLng());
+                                this.openInfoWindowHtml(this.__address_info);
+                                $("info").innerHTML = info;
+                            });
+                        }
+                        else {
+                            alert("无法解析: " + address);
+                        }
+                    }
+                )
+                }
+
+                $("btn_go").onclick = function () {
+                    g.getCoordinates($("address").value);
+                }
+                $("btn_go").onclick();
+            }
+            else {
+                alert('不支持的浏览器');
+            }
+        }
+        window.onunload = function () {
+            GUnload();
+        }
+    </script>
+    <style media="screen">
+        body
+        {
+            margin: 0;
+            padding: 0;
+            font-size: 9pt;
+            line-height: 1.5em;
+        }
+        #frame
+        {
+            width: 700px;
+            margin: 20px auto 10px;
+        }
+        #form
+        {
+            margin: 0 0 10px;
+            text-align: center;
+        }
+        #form input
+        {
+            border: 1px solid #ccc;
+            font-size: 9pt;
+            width: 200px;
+        }
+        #form button
+        {
+            font-size: 9pt;
+            border: 1px solid #ccc;
+        }
+        #form button:hover
+        {
+            background: #eef;
+        }
+        #map
+        {
+            height: 400px;
+            margin: 0 0 10px;
+            border: 5px solid #ccc;
+        }
+        #vifix
+        {
+            text-align: center;
+        }
+        #vifix a
+        {
+            color: #f00;
+            text-decoration: none;
+        }
+        #vifix a:hover
+        {
+            color: #f96;
+        }
+    </style>
+</head>
+<body>
+    <div id="frame">
+        <div id="form">
+            输入一个地址:
+            <input id="address" value="杭州市西湖三潭印月" />
+            <button id="btn_go">
+                获取坐标</button>
+        </div>
+        <div id="map">
+        </div>
+        <div id="info">
+        </div>
+        <div id="vifix">
+            Powered by <a href="http://code.google.com/apis/maps/" target="_blank">Google Map API</a>
+            / Created by <a href="http://vifix.cn%22%3evifix.cn%3c/a>
+        </div>
+    </div>
+</body>
+</html>
