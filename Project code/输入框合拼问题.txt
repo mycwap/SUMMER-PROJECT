@@ -5,5 +5,5 @@ email 表单验证部分，不能用系统自带的
 之后有表单验证问题
 
 col 纵向排列 与否 与 col-xs-  和 col-md-有关
-
+123
 form-group
