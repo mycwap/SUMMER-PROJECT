@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FunDeli</title>
+    <title>FunDeli Business</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/customize.css" rel="stylesheet">
 
@@ -100,6 +100,7 @@ function geolocate() {
       }
       
     </style>
+  
   </head>
 
   <body onload="initialize()"> 
@@ -176,6 +177,7 @@ function geolocate() {
             <input id="autocomplete" placeholder="Enter your address"
              onFocus="geolocate()" type="text" name="business_address">
           </label>
+
         <br>
         <label style="margin-right: 32px;">Street Address:</label>
         <input type="text" name="business_street"><br>
@@ -202,8 +204,7 @@ function geolocate() {
             <option value="Indian">Indian</option>
         </select><br>
         
-        <button type="submit" id="b_info_update"style="
-        width: 50px; margin-top: 20px;"><a href="business_menu.php">Next</a></button>
+        <button type="submit" id="b_info_update" style="width: 50px; margin-top: 20px;"><a href="business_menu.php">Next</a></button>
         
         </form>
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FunDeli</title>
+    <title>FunDeli Business</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/customize.css" rel="stylesheet">
 
@@ -100,11 +100,10 @@ function geolocate() {
       }
       
     </style>
-
-
+  
   </head>
 
-  <body> 
+  <body onload="initialize()"> 
   <nav class="navbar navbar-default navbar-customize navbar-fixed-top" role="navigation">
     
     <div class="container">
@@ -125,7 +124,9 @@ function geolocate() {
           <ul class="nav navbar-nav ">                                               
             
             <li><a href="#">How It Works</a></li>
-            <li><a href="#myModal" data-toggle="modal" data-target="#myModal">Log-in</a></li>
+            <b>Welcome:
+              
+          </b>
           </ul>
        </div>
     </div>
@@ -138,78 +139,7 @@ function geolocate() {
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <img class="modal-title" src="image/logo.png"/>         
         </div>
-        <div class="modal-body">
-          <div class="row">
-
-            <div class="col-md-6 " >
-              <form id="loginform" action="login_send.php" method="post" onsubmit="return logincheck()">
-                <div class="form-group">
-                  <h3 class="login-title">User Login:</h3>
-                        
-                  <input id="email" class="form-control" placeholder="Enter email" type="email" name="email">
-                    <br>
-                      <span id="error_email" style="color:red" ></span>
-                    <br>
-                </div>
-                <div class="form-group">
-                      
-                  <input id="password" class="form-control" id="password" placeholder="Password" type="password" name="password">
-                  <br>
-                  <span id="error_password" style="color:red"></span>
-                  <br>
-                </div>
-                <div class="checkbox-login">
-                  <label>
-                    <input type="checkbox"> Remember me
-                  </label>
-                    <p style="display:inline; margin-left:30px;"class="text-right"><a style="text-decoration: none;" href="#">Forgot password?</a>
-                    </p>
-                </div>
-                <button type="submit" class="btn btn-default">Login</button>     
-              </form>
-            </div>
-
-            <div class="col-md-6 signin-area">
-              <form id="registration" action="registration_send.php" method="post" onsubmit="return formcheck()">
-                <div class="form-group">
-                  <h3 class="signin-title">Sign up(User):</h3>    
-                    <input class="form-control" id="email" placeholder="Enter email" type="email" name="email">
-                    <br>
-                    <span id="error_email" style="color:red" ></span>
-                    <br>
-                </div>
-                <div class="form-group">
-                           
-                    <input class="form-control" id="username" placeholder="Username" type="type" name="username">
-                    <br>
-                    <span id="error_uname" style="color:red" ></span>
-                    <br>
-                </div>
-                <div class="form-group">
-                           
-                    <input class="form-control" id="password" placeholder="Password" type="password" name="password">
-                    <br>
-                    <span id="error_pword" style="color:red" ></span>
-                    <br>
-                </div>
-                <div class="form-group">
-                           
-                    <input class="form-control" id="cpassword" placeholder="Re-enter password" type="password" name="repassword">
-                    <br>
-                    <span id="error_cpword" style="color:red" ></span>
-                    <br>
-                </div>
-                <div class="checkbox-signin">
-                  <label>
-                    <input type="checkbox"> Keep me logged in to my account
-                  </label>  
-                </div>
-                <button type="submit" class="btn btn-default">Sign up</button>
-              </form>
-            </div>
-           
-        </div>
-      </div>
+        
         <div class="modal-footer">
           <a href="#" data-dismiss="modal" class="btn">Close</a>
         </div>
@@ -221,27 +151,45 @@ function geolocate() {
   <div class="jumbotron">
      
       <div class="slogan">
-        <p>We provide</p>
-        <p>On demand, fast lunch food</p>
+        <p>Fundeli</p>
+        <p>Business Home Page</p>
       </div>
 
       <div class="search" style="text-align:center;">
-        <form>
-          
-          <label class="typechoose" for="deliver">Ask for Delivery</label>
-          <input class="choose" type="radio" name="food" id="delivery" value="delivery"> 
-          <label class="typechoose" for="female">or Collect</label>
-          <input class="choose" type="radio" name="food" id="delivery" value="pickup"><br><br><br>
+        <form class="business_info" action="business_info_send.php" method="post">
 
-         
+        <!--<label style="margin-right: 65px;">First name:</label>
+        <input type="text" name="fn"><br>
+        <label style="margin-right: 65px;">Last name:</label>
+        <input stype="text" name="ln"><br>-->
+        <label style="margin-right: 40px;">Business Type:</label>
+        <select id="b_foodtype" name="business_type">
+            <option value="takeaway">Takeaway</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="delifood">Deli food</option>
+            <option value="fastfood">Fast food</option>
+        </select><br>
 
-          
-         <label style="width: 310px;">Business Area:&nbsp;
+          <label style="width: 310px;">Business Area:&nbsp;
             <input id="autocomplete" placeholder="Enter your address"
              onFocus="geolocate()" type="text" name="business_address">
           </label>
-          
-          <select id="foodtype">
+
+        <br>
+        <label style="margin-right: 32px;">Street Address:</label>
+        <input type="text" name="business_street"><br>
+        <label style="margin-right: 44px;">City Address:</label>
+        <input stype="text" name="business_city"><br>
+
+        <label style="margin-right: 30px;">Business Name:</label>
+        <input stype="text" name="business_name"><br>
+        <label style="margin-right: 18px;">Business Contact:</label>
+        <input type="text" name="business_contact"><br>
+        <label style="margin-right: 32px;">Business Email:</label>
+        <input type="text" name="business_email"><br>
+
+        <label style="margin-right: 46px;">Cuisine Type:</label>
+        <select id="b_foodtype">
             <option value="Chinese">Chinese</option>
             <option value="Japanese">Japanese</option>
             <option value="Italian">Italian</option>
@@ -251,108 +199,26 @@ function geolocate() {
             <option value="Turkish">Turkish</option>
             <option value="Thai">Thai</option>
             <option value="Indian">Indian</option>
-          </select>
-
-          <input type="submit" value="Search" id="pressbutton">
-        </form>
+        </select><br>
         
+        <button type="submit" id="b_info_update"style="
+        width: 50px; margin-top: 20px;"><a href="business_menu.php">Next</a></button>
+        
+        </form>
+
+
       </div>       
     
   </div>
 
-
-<div class="modal fade" id="myModal2">
-  <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <img class="modal-title" src="image/logo.png"/>         
-        </div>
-        <div class="modal-body">
-          <div class="row">
-
-              <div class="col-md-6 " >
-                <form action="business_owner_login.php" method="post">
-                    <div class="form-group">
-                        <h3 class="login-title">Business Login:</h3>
-                        
-                        <input name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter owner's email" type="email">
-                    </div>
-                    <div class="form-group">
-                      
-                      <input name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
-                    </div>
-                    <div class="checkbox-login">
-                      <label>
-                        <input type="checkbox"> Remember me
-                      </label>
-                      <p style="display:inline; margin-left:30px;"class="text-right"><a style="text-decoration: none;" href="#">Forgot password?</a></p>
-                    </div>
-                    <button type="submit" class="btn btn-default">Login</button>  
-                </form>
-              </div>
-
-              <div class="col-md-6 signin-area">
-                <form action="business_owner_sign.php" method="post">
-
-                    <div class="form-group">
-                      <h3 class="signin-title">Sign up(Business):</h3>
-                          
-                      <input name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter owner's email" type="email">
-                    </div>
-                    <div class="form-group">
-                           
-                      <input name="owner_fullname" class="form-control" id="exampleInputPassword1" placeholder="Owner's full name" type="type">
-                    </div>
-
-                    <div class="form-group">
-                           
-                      <input name="business_contact" class="form-control" id="exampleInputPassword1" placeholder="Business owner's contact" type="type">
-                    </div>
-
-                    <div class="form-group">
-                           
-                      <input name="owner_username" class="form-control" id="exampleInputPassword1" placeholder="Owner's username" type="type">
-                    </div>
-
-                    <div class="form-group">
-                           
-                      <input name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" type="password">
-                    </div>
-                    <div class="form-group">
-                           
-                      <input class="form-control" id="exampleInputPassword1" placeholder="Re-enter password" type="password">
-                    </div>
-                    <div class="checkbox-signin">
-                      <label>
-                        <input type="checkbox"> Keep me logged in to my account
-                      </label>
-                    </div>
-                  <button type="submit" class="btn btn-default">Sign up</button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-          <a href="#" data-dismiss="modal" class="btn">Close</a>
-        </div>
-      </div>
-    </div>
-</div>
-
-
-
-
-
- 
 
   <div class="footer">
     <div class="info">
       <ul class="footer-nav no_padding  ">
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
-        <li><a href="#">Blog</a></li> 
-        <li><a href="#myModal" data-toggle="modal" data-target="#myModal2">Business</a></li> 
+        <li><a href="#">Blog</a></li>
+        <li><a href="home3.html">Logout</a></li>
       </ul>
     </div>
        
