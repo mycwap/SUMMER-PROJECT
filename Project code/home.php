@@ -98,7 +98,7 @@
 
       <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1">   
         <ul class="nav navbar-nav ">                                                
-          <li><a href="product_list.html">How it works/ </a></li>
+          <li><a href="product_list.html">How works/ </a></li>
           <b>Welcome:
               <?php
               echo $_COOKIE["username"];                
