@@ -1,0 +1,31 @@
+<html>     
+<head>     
+<meta http-equiv="Content-Type" content="text/html;
+charset=gb2312">     
+<title>带有图片预览功能的上传表单</title>     
+<script>     
+function viewmypic(mypic,imgfile) {      
+if (imgfile.value){      
+mypic.src=imgfile.value;      
+mypic.style.display="";      
+mypic.border=1;      
+}      
+}      
+</script>     
+</head>     
+<body>     
+<center>     
+<form >     
+<input name="imgfile" type="file" id="imgfile" size="40"
+onchange="viewmypic(showimg,this.form.imgfile);" />     
+<br />     
+</form>     
+<img name="showimg" id="showimg" src="" style="display:none;"
+alt="预览图片" />     
+<br />     
+</div>     
+<div style="display:none">     
+</div>     
+</center>     
+</body>     
+</html>

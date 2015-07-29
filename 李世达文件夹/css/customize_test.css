@@ -1,0 +1,57 @@
+.no_padding{
+	padding: 0px 0px;
+}
+.no_margin{
+	margin:0px 0px;
+}
+
+.foot{
+	height: 450px;
+	background-color: grey;
+}
+
+.info{
+	/*margin: 0px auto;*/
+	height: 120px;
+	width: 100px;
+	background-color: red;
+	 
+}
+
+.icon{
+	/*margin: 0px auto;*/
+	height: 120px;
+	width: 100px;
+	background-color: blue;
+	 
+}
+
+.copyright{
+	/*margin: 0px auto;*/
+	height: 120px;
+	width: 100px;
+	background-color: yellow;
+	 
+}
+
+/* make sidebar nav vertical */ 
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+  }
+  .sidebar-nav .navbar ul:not {
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}

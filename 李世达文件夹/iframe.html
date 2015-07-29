@@ -1,0 +1,25 @@
+<!DOCTYPE>
+<html lang="en">
+<head>
+	<title>Image Upload</title>
+	<script type="text/javascript">
+	function updatepicture(pic){
+		document.getElementById("image").setAttribute("src",pic)
+	}
+	</script>
+</head>
+<body>
+<h3>PHP image upload</h3>
+<form id="form" method="post" action="upload.php" enctype="multipart/form-data" target="iframe">
+	<input type="file" id="file" name="file"/>
+	<input type="submit" name="submit" id="submit" value="upload file">
+</form>
+
+<p id="message">Upload message will go here.</p>
+
+<img style="min-height:120px; min-width:200px; max-height:120px" id="image"/><br><br>
+
+<iframe style="display:none;" name="iframe"></iframe>
+
+</body>
+</html>
