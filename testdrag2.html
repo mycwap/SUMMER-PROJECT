@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Google Maps</title>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+<script type="text/javascript">
+function initialize() {
+    var myLatlng = new google.maps.LatLng(51.893609,-8.49119769999993);
+    var myOptions = {
+      zoom: 14,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    addMarker(myLatlng, 'Default Marker', map);
+
+    google.maps.event.addListener(map,'click',function(event) {
+        addMarker(event.latLng, 'Click Generated Marker', map);
+    });
+
+
+}
+
+
+
+
+function addMarker(latlng,title,map) {
+
+    var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: title,
+            draggable:true
+    });
+
+
+    google.maps.event.addListener(marker,'drag',function(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lng').value = event.latLng.lng();
+    });
+
+    google.maps.event.addListener(marker,'dragend',function(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lng').value = event.latLng.lng();
+    });
+}
+</script>
+</head>
+<body onload="initialize()">
+<div id="map_canvas" style="width:500px;height:500px;"></div>
+<input id="address" type="textbox" name="business_address" placeholder="Cork, Ireland">
+<br>
+<input type="button" value="Search Map" onclick="codeAddress()">
+<br>
+Lat: <input type="text" id="lat"><br>
+Lng: <input type="text" id="lng">
+
+</body></html>

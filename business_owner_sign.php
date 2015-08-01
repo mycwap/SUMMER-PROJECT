@@ -14,41 +14,21 @@ if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
 }
 
-        $username=$_POST['username']; 
+        $username=$_POST['owner_username']; 
         setcookie("sign_username", $username, time()+3600);       
+        $ownerfullname=$_POST['owner_fullname'];
         $email=$_POST['email'];
+        setcookie("sign_email", $email, time()+3600);
+        $b_contact=$_POST['business_contact'];
         $password=$_POST['password'];
         
 
-       
-
-$sql = "INSERT INTO user (username, email, password)
-VALUES ('$username', '$email', '$password')";
+$sql = "INSERT INTO owner_business (username, email, password, owner_fullname, owner_contact)
+VALUES ('$username', '$email', '$password', '$ownerfullname', '$b_contact')";
 
 if ($conn->query($sql) === TRUE) 
 {
-    header('Location: signed_home.php');
+    header('Location: business_login.php');
 } 
-
-
-
-/*$sql2 = "SELECT username FROM user WHERE email = '$email' and password = '$password'";
-
-$result = $conn->query($sql2);
-
-if ($result->num_rows > 0) 
-{
-     // output data of each row
-     while($row = $result->fetch_assoc()) 
-     {
-         $uname=$row["username"];
-         setcookie("username", $uname, time()+3600);          
-     }
-} 
-else 
-{
-     echo "0 results";
-}*/
-
 $conn->close();
 ?>

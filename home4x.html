@@ -7,60 +7,133 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/customize.css" rel="stylesheet">
 
-<!-- <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"> -->
+    <style>
+      #map-canvas {
+        height: 300px;
+        width: 400px;
+        margin: 0;
+        padding: 0;
+      }
+
+      #address{
+        float: left;
+      }
+
+      
+
+    </style>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
     <script>
-// This example displays an address form, using the autocomplete feature
-// of the Google Places API to help users fill in the information.
+// This example adds a search box to a map, using the Google Place Autocomplete
+// feature. People can enter geographical searches. The search box will return a
+// pick list containing a mix of places and predicted search terms.
 
-var placeSearch, autocomplete;
-var componentForm = {
-  street_number: 'short_name',
-  route: 'long_name',
-  locality: 'long_name',
-  administrative_area_level_1: 'short_name',
-  country: 'long_name',
-  postal_code: 'short_name'
-};
+var geocoder;
+var map;
 
 function initialize() {
-  // Create the autocomplete object, restricting the search
-  // to geographical location types.
-  autocomplete = new google.maps.places.Autocomplete(
-      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+  var myLatlng = new google.maps.LatLng(51.893609,-8.49119769999993);
+  geocoder = new google.maps.Geocoder();
+  
+  map = new google.maps.Map(document.getElementById('map-canvas'),{
+    center:myLatlng,
+    zoom:15
+  });
+}
+
+
+
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          draggable: true,
+          animation: google.maps.Animation.DROP,
+          position: results[0].geometry.location
+      });
+
+        document.getElementById('lat').value = marker.getPosition().lat();
+        document.getElementById('lng').value = marker.getPosition().lng();
+
+      google.maps.event.addListener(marker,'dragend',function(event) {
+        document.getElementById('lat').value = this.getPosition().lat();
+        document.getElementById('lng').value = this.getPosition().lng();
+    });
+
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+
+  
+
+}
+
+    </script>
+    <script>
+// This example adds a search box to a map, using the Google Place Autocomplete
+// feature. People can enter geographical searches. The search box will return a
+// pick list containing a mix of places and predicted search terms.
+
+var address;
+var geocoder;
+var map;
+
+function initialize() {
+  var myLatlng = new google.maps.LatLng(51.893609,-8.49119769999993);
+  geocoder = new google.maps.Geocoder();
+  
+  map = new google.maps.Map(document.getElementById('map-canvas'),{
+    center:myLatlng,
+    zoom:15
+  });
+
+
+  address = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('address')),
       { types: ['geocode'] });
   // When the user selects an address from the dropdown,
   // populate the address fields in the form.
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+  google.maps.event.addListener(address, 'place_changed', function() {
     fillInAddress();
   });
 }
 
-// [START region_fillform]
-function fillInAddress() {
-  // Get the place details from the autocomplete object.
-  var place = autocomplete.getPlace();
 
-  for (var component in componentForm) {
-    document.getElementById(component).value = '';
-    document.getElementById(component).disabled = false;
-  }
 
-  // Get each component of the address from the place details
-  // and fill the corresponding field on the form.
-  for (var i = 0; i < place.address_components.length; i++) {
-    var addressType = place.address_components[i].types[0];
-    if (componentForm[addressType]) {
-      var val = place.address_components[i][componentForm[addressType]];
-      document.getElementById(addressType).value = val;
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          draggable: true,
+          animation: google.maps.Animation.DROP,
+          position: results[0].geometry.location
+      });
+
+        document.getElementById('lat').value = marker.getPosition().lat();
+        document.getElementById('lng').value = marker.getPosition().lng();
+
+      google.maps.event.addListener(marker,'dragend',function(event) {
+        document.getElementById('lat').value = this.getPosition().lat();
+        document.getElementById('lng').value = this.getPosition().lng();
+    });
+
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
     }
-  }
+  });
 }
-// [END region_fillform]
 
-// [START region_geolocation]
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
 function geolocate() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -70,13 +143,12 @@ function geolocate() {
         center: geolocation,
         radius: position.coords.accuracy
       });
-      autocomplete.setBounds(circle.getBounds());
+      address.setBounds(circle.getBounds());
     });
   }
 }
-// [END region_geolocation]
 
-    </script>
+  </script>
 
 
   <style>
@@ -99,7 +171,7 @@ function geolocate() {
         color: #303030;
       }
       
-    </style>
+  </style>
   
   </head>
 
@@ -238,19 +310,22 @@ function geolocate() {
           <br>
           <label style="margin-right: 46px;">Cuisine Type:</label>
         <select id="foodtype">
+            <option value="American">American</option>
             <option value="Chinese">Chinese</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Italian">Italian</option>
             <option value="French">French</option>
-            <option value="Spainish">Spainish</option>
-            <option value="Mexican">Mexican</option>
-            <option value="Turkish">Turkish</option>
-            <option value="Thai">Thai</option>
+            <option value="Irish">Irish</option>
+            <option value="Italian">Italian</option>
             <option value="Indian">Indian</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Middle East">Middle East</option>
+            <option value="Spainish">Spainish</option>
+            <option value="Thai">Thai</option>
+            <option value="Turkish">Turkish</option>
           </select><br>
 
           <label style="width: 310px;">Find food nearby:&nbsp;
-            <input id="autocomplete" placeholder="Enter your address"
+            <input id="autocomplete" placeholder="Enter the address"
              onFocus="geolocate()" type="text" name="business_address">
           </label>
 

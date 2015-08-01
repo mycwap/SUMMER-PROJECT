@@ -80,11 +80,20 @@ function geolocate() {
 
 
   <style>
+
       #locationField, #controls {
         position: relative;
         width: 200px;
         
       }
+
+      #map-canvas {
+        height: 400px;
+        width: 400px;
+        margin: 0;
+        padding: 0;
+      }
+
       #autocomplete {
         
         top: 0px;
@@ -177,6 +186,9 @@ function geolocate() {
             <input id="autocomplete" placeholder="Enter your address"
              onFocus="geolocate()" type="text" name="business_address">
           </label>
+        <br>
+        <div id="map-canvas"></div>
+
 
         <br>
         <label style="margin-right: 32px;">Street Address:</label>
