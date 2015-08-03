@@ -25,57 +25,7 @@
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-    <script>
-// This example adds a search box to a map, using the Google Place Autocomplete
-// feature. People can enter geographical searches. The search box will return a
-// pick list containing a mix of places and predicted search terms.
-
-var geocoder;
-var map;
-
-function initialize() {
-  var myLatlng = new google.maps.LatLng(51.893609,-8.49119769999993);
-  geocoder = new google.maps.Geocoder();
-  
-  map = new google.maps.Map(document.getElementById('map-canvas'),{
-    center:myLatlng,
-    zoom:15
-  });
-}
-
-
-
-function codeAddress() {
-  var address = document.getElementById('address').value;
-  geocoder.geocode( { 'address': address}, function(results, status) {
-
-    if (status == google.maps.GeocoderStatus.OK) {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          draggable: true,
-          animation: google.maps.Animation.DROP,
-          position: results[0].geometry.location
-      });
-
-        document.getElementById('lat').value = marker.getPosition().lat();
-        document.getElementById('lng').value = marker.getPosition().lng();
-
-      google.maps.event.addListener(marker,'dragend',function(event) {
-        document.getElementById('lat').value = this.getPosition().lat();
-        document.getElementById('lng').value = this.getPosition().lng();
-    });
-
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-
-  
-
-}
-
-    </script>
+    
     <script>
 // This example adds a search box to a map, using the Google Place Autocomplete
 // feature. People can enter geographical searches. The search box will return a
@@ -324,15 +274,18 @@ function geolocate() {
             <option value="Turkish">Turkish</option>
           </select><br>
 
-          <label style="width: 310px;">Find food nearby:&nbsp;
-            <input id="autocomplete" placeholder="Enter the address"
-             onFocus="geolocate()" type="text" name="business_address">
+          <label style="width: 310px; float: left;">Find food nearby:&nbsp;
+          <input id="address" onFocus="geolocate()" type="textbox" name="business_address" placeholder="Street, City">
           </label>
-
-        <br>
-        
-
-        
+          
+          <input type="button" value="Search Map" onclick="codeAddress()">
+    
+          <div id="map-canvas"></div>
+          <br>
+          <input type="hidden" name="lat" id="lat">
+          <br>
+          <input type="hidden" name="lng" id="lng">
+          <br>      
         
         <button type="submit" id="b_info_update" style="width: 50px; margin-top: 20px;"><a href="product_list.php">Search</a></button>
         

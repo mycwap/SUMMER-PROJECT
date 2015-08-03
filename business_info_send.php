@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
         $btype=$_POST['business_type'];
-        $cuisine_type=$_POST['cuisine_type'];
+        $cuisinetype=$_POST['cuisine_type'];
 
         $email=$_COOKIE["sign_email"];
         $username=$_COOKIE["sign_username"];
@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
      }
 }
 
-$sql5 = "SELECT cuisine_type_id FROM cuisine_type WHERE cuisine_type_name = '$cuisine_type'";  
+$sql5 = "SELECT cuisine_type_id FROM cuisine_type WHERE cuisine_name = '$cuisinetype'";  
 
 $result = $conn->query($sql5);
 
@@ -78,7 +78,7 @@ if ($result->num_rows > 0) {
 
 
 $sql4 = "INSERT INTO business (business_name, business_contact ,business_email, owner_id, business_type_id, business_area_id, business_address, business_address_lat, business_address_lng, cuisine_type_id)
-VALUES ('$bname', '$bcontact', '$bemail', '$owner_id', '$business_type_id', '$business_area_id', '$baddress', '$business_address_lat', '$business_address_lng', '$cuisine_type')";
+VALUES ('$bname', '$bcontact', '$bemail', '$owner_id', '$business_type_id', '$business_area_id', '$baddress', '$business_address_lat', '$business_address_lng', '$cuisine_type_id')";
 
 if ($conn->query($sql4) === TRUE) 
 {

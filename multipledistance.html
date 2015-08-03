@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+     <title>Google Maps JavaScript API v3 Example: Map Simple</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+     <meta charset="utf-8">
+     <style>
+       html, body {
+         margin: 0;
+         padding: 0;
+         height: 100%;
+       }
+       #map_canvas {
+         height: 500px;
+         width: 600px;
+       }
+     </style>
+     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+     
+    <script>
+     var service = new google.maps.DistanceMatrixService();
+     var places = [{lat:40.7143528, lng:-74.0059731},
+                   {lat:40.735657, lng:-74.1723667},
+                   {lat:34.0522342, lng:-118.2436849},
+                   {lat:32.7766642, lng:-96.796987}];
+     var foundlatlng = new google.maps.LatLng(40.65, -73.95); // Brooklyn, NY
+     var goto = [];
+     for (var i=0;i<places.length;i++){
+        goto.push(new google.maps.LatLng(places[i].lat, places[i].lng));
+     }    
+     var service = new google.maps.DistanceMatrixService();//request distance matrix
+     var outputdiv = document.getElementById('info');
+
+//     var goto = new google.maps.LatLng(places[i].lat, places[i].lng);address:"Dallas, TX", address:"Newark, NJ", address:"New York, NY", 
+                function callback(response, status) {
+                var distancefield = distancefield;
+                  if (status == google.maps.DistanceMatrixStatus.OK) {
+                    var origins = response.originAddresses;
+                    var destinations = response.destinationAddresses;
+                    var results = response.rows[0].elements;
+                    var htmlString = "<table border='1'>"; 
+                    for (var r = 0; r < results.length; r++) {
+                        var element = results[r];
+                        var distancetext = element.distance.text;
+                        var durationtext = element.duration.text;
+                        var to = destinations[r];
+                        htmlString += "<tr><td>"+response.originAddresses[0]+"</td><td>"+to+"</td><td>"+distancetext+"</td><td>"+durationtext+"</td></tr>";
+                    }//end for r
+                    htmlString += "</table>"; 
+                    document.getElementById('info').innerHTML = htmlString; 
+                      
+
+                  }//end if status=ok
+                }//end callback
+
+//    console.log(places);
+
+       var map;
+       var geocoder = new google.maps.Geocoder();         
+       function initialize() {
+         var mapOptions = {
+           zoom: 8,
+           center: foundlatlng,
+           mapTypeId: google.maps.MapTypeId.ROADMAP
+         };
+         map = new google.maps.Map(document.getElementById('map_canvas'),
+             mapOptions);
+
+            service.getDistanceMatrix(
+              {
+                origins: [foundlatlng],
+                destinations: goto,
+                travelMode: google.maps.TravelMode.DRIVING,
+                unitSystem: google.maps.UnitSystem.IMPERIAL,
+                avoidHighways: false,
+                avoidTolls: false,
+              }, callback);//end service.getdistancematrix()
+        }
+      
+      google.maps.event.addDomListener(window, 'load', initialize);
+     </script>
+   </head>
+   <body>
+<table border="1">
+  <tr>
+    <td>
+      <div id="map_canvas"></div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <div id="info"></div>
+    </td>
+  </tr>
+</table>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"> 
+</script> 
+<script type="text/javascript"> 
+_uacct = "UA-162157-1";
+urchinTracker();
+</script> 
+   </body>
+ </html>
