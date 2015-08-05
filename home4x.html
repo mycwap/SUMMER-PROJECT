@@ -247,31 +247,31 @@ function geolocate() {
       </div>
 
       <div class="search" style="text-align:center;">
-        <form class="business_info" action="business_info_send.php" method="post">
+        <form class="business_info" action="search_data_send.php" method="post">
 
         <!--<label style="margin-right: 65px;">First name:</label>
         <input type="text" name="fn"><br>
         <label style="margin-right: 65px;">Last name:</label>
         <input stype="text" name="ln"><br>-->
         <label class="typechoose" for="deliver">Ask for Delivery</label>
-          <input class="choose" type="radio" name="food" id="delivery" value="delivery"><label class="typechoose" for="female">or Collect</label>
-          <input class="choose" type="radio" name="food" id="delivery" value="pickup">
+          <input class="choose" type="radio" name="deliver" id="delivery" value="1"><label class="typechoose">or Collect</label>
+          <input class="choose" type="radio" name="deliver" id="delivery" value="2">
 
           <br>
           <label style="margin-right: 46px;">Cuisine Type:</label>
-        <select id="foodtype">
-            <option value="American">American</option>
-            <option value="Chinese">Chinese</option>
-            <option value="French">French</option>
-            <option value="Irish">Irish</option>
-            <option value="Italian">Italian</option>
-            <option value="Indian">Indian</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Mexican">Mexican</option>
-            <option value="Middle East">Middle East</option>
-            <option value="Spainish">Spainish</option>
-            <option value="Thai">Thai</option>
-            <option value="Turkish">Turkish</option>
+        <select id="foodtype" name="cuisine_type">
+            <option value="1">Chinese</option>
+            <option value="2">Japanese</option>
+            <option value="3">Irish</option>
+            <option value="4">American</option>
+            <option value="5">French</option>
+            <option value="6">Italian</option>
+            <option value="7">Spainish</option>
+            <option value="8">Thai</option>
+            <option value="9">Mexican</option>
+            <option value="10">Indian</option>
+            <option value="11">Turkish</option>     
+            <option value="12">Middle East</option>  
           </select><br>
 
           <label style="width: 310px; float: left;">Find food nearby:&nbsp;
@@ -287,7 +287,7 @@ function geolocate() {
           <input type="hidden" name="lng" id="lng">
           <br>      
         
-        <button type="submit" id="b_info_update" style="width: 50px; margin-top: 20px;"><a href="product_list.php">Search</a></button>
+        <input type="submit" value="Search" id="b_info_update" style="width: 50px; margin-top: 20px;">
         
         </form>
 

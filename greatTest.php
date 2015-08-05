@@ -15,57 +15,7 @@
        }
      </style>
 
-<!--      <div>
-<?php 
-    
-            $servername = "localhost";
-            $name = "root";
-            $password = "dream900412";
-            $dbname = "spdb";
 
-            $conn = new mysqli($servername, $name, $password, $dbname);
-
-            if ($conn->connect_error) 
-            {
-            die("Connection failed: " . $conn->connect_error);
-            }
-
-            $sql = "SELECT business_address_lat,business_address_lng FROM business";
-
-
-            if ($result = $conn->query($sql)) {
-
- 
-
-            /* fetch associative array */
-            while ($row = $result->fetch_assoc()) {
-            // echo $row["business_address_lat"]["business_address_lng"]. ",";
-            echo "<p>" .$row["business_address_lat"]. "," .$row["business_address_lng"]. "</p>";
-
-
-            }
-            /* free result set */
-            $result->free();
-            }
-
-     //        $result=mysql_query($sql);
-     //         while($row = mysql_fetch_array($result)){
-     //  		       echo "{lat:" .$row[0]. ",lng:" .$row[1]. "},";
- 				// }
-
-            //$result = $conn->query($sql);
-            //if ($result->num_rows > 0) {
-            
-            //while($row = $result->fetch_assoc()) {
-            //printf( $row["business_address_lat"] + ",");
-            //   }
-            //}
-
-            //foreach($result as $key => $value){echo "'" . $value . "',"; };
-            $conn->close();
-
-            ?>];
-     </div> -->
      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
      <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
@@ -129,7 +79,7 @@
 
             // echo $row["business_address_lat"]["business_address_lng"]. ",";
      //        echo $row["business_address_lat"].",lng:".$row["business_address_lng"];
-            echo  $row["business_address_lat"]. "," .$row["business_address_lng"];
+            echo  "[lat:".$row["business_address_lat"]. ",lng:" .$row["business_address_lng"]."]";
 
             }
            	// To pretect the structure
