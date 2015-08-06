@@ -1,5 +1,5 @@
 <?php
-include ("dbconnector.php");
+include ("dbinfo.php");
 
 function parseToXML($htmlStr) 
 { 
@@ -26,8 +26,10 @@ if (!$db_selected) {
 $cuisines = $_COOKIE["cuisines_type"];
 
 // Select all the rows in the markers table
-$query = "SELECT business_id, business_name, business_address, business_address_lat, business_address_lng ,cuisine_type_id FROM business WHERE cuisine_type_id='$cuisines'";
+$query = "SELECT business_id, business_name, business_address, business_address_lat, business_address_lng ,cuisine_type_id, business_type_id FROM business WHERE cuisine_type_id='$cuisines'";
+
 $result = mysqli_query($connection, $query);
+
 if (!$result) {
   die('Invalid query: ' . mysqli_connect_error());
 }
@@ -45,7 +47,7 @@ while ($row = mysqli_fetch_assoc($result)){
   echo 'address="' . parseToXML($row['business_address']) . '" ';
   echo 'lat="' . $row['business_address_lat'] . '" ';
   echo 'lng="' . $row['business_address_lng'] . '" ';
-  echo 'type="' . $row['cuisine_type_id'] . '" ';
+  echo 'type="' . $row['business_type_id'] . '" ';
   echo '/>';
 }
 
