@@ -19,7 +19,8 @@
 
 				<div>
 					<?php
-						include_once("dbinfo_li.php");
+					
+						include ("dbinfo.php");
 
 						$business_id = $_COOKIE["business_i_string"];
 
@@ -63,15 +64,15 @@
 						//  ORDER BY business_name ASC";
 
 						 // run sql statement
-						 $result=mysql_query($sql2, $db) or die(mysql_error());
+						 $result=mysqli_query($connection,$sql2) or die(mysqli_connect_error());
 
 						 // find out how many matches
-						 $number=mysql_num_rows($result);
+						 $number=mysqli_num_rows($result);
 
 						 echo "<h2 > $number  results found</h2>" ;
 						 // echo "$search";
 
-						while ($row = mysql_fetch_object($result)) {
+						while ($row = mysqli_fetch_object($result)) {
 
 							$b_name = $row->business_name;
 							// $b_contact = $row->business_contact;

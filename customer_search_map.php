@@ -23,35 +23,27 @@
 
     </style>
     <?php
+    include ("dbinfo.php");
+    $cuisines = $_COOKIE["cuisines_type"];
+    // Select all the rows in the markers table
+    $query = "SELECT business_id, business_name, business_address, business_address_lat, business_address_lng ,
+    cuisine_type_id FROM business WHERE cuisine_type_id='$cuisines'";
 
-    include ("dbconnector.php");
+    $result = mysqli_query($connection, $query);
 
-    $connection = mysqli_connect($servername, $username, $password);
-    if (!$connection) {
-    die('Not connected : ' . mysqli_connect_error());
+    $business_id = array();
+    while ($row = mysqli_fetch_object($result)){
+    $business_id[] = $row->business_id;
     }
 
-// Set the active MySQL database
-    $db_selected = mysqli_select_db($connection,$database);
-    if (!$db_selected) {
-    die ('Can\'t use db : ' . mysqli_connect_error());
-    }
+    // $business_id_string = join(",", $business_id);
 
-    $delivery = $_COOKIE["delivery_option"];  
+    $business_id_string = implode(",", $business_id);
+
+    setcookie("business_i_string", $business_id_string, time()+3600);
+
+    // $delivery = $_COOKIE["delivery_option"];  
     
-    $customer_position_lat = $_COOKIE["customer_position_lat"];
-
-    $customer_position_lng = $_COOKIE["customer_position_lng"];
-
-
-
-    // $customer_position_lat=$_COOKIE["customer_position_lat"];
-    // $customer_position_lat = $POST_['lat'];
-    // $customer_position_lng=$_COOKIE["customer_position_lng"];
-    // $customer_position_lng = $POST_['lng'];
-
-
-
 
     ?>
     
@@ -62,25 +54,76 @@
     //<![CDATA[
 
     var customIcons = {
-      restaurant: {
-        icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png',
-        shadow: 'http://labs.google.com/ridefinder/images/mm_20_shadow.png'
+      1: {
+        icon: 'mapicon/takeaway.png' 
+        // size: new google.maps.Size(48, 48),  
+        // origin: new google.maps.Point(0,0), 
+        // anchor: new google.maps.Point(0, 48)   
       },
-      bar: {
-        icon: 'http://labs.google.com/ridefinder/images/mm_20_red.png',
-        shadow: 'http://labs.google.com/ridefinder/images/mm_20_shadow.png'
+      2: {
+        icon: 'mapicon/restaurant.png'
+        // size: new google.maps.Size(48, 48),  
+        // origin: new google.maps.Point(0,0), 
+        // anchor: new google.maps.Point(0, 48)
+
+      },
+      3: {
+        icon: 'mapicon/delifood.png'
+        // size: new google.maps.Size(48, 48),  
+        // origin: new google.maps.Point(0,0), 
+        // anchor: new google.maps.Point(0, 48)
+      },
+      4: {
+        icon: 'mapicon/fastfood.png'
+        // size: new google.maps.Size(48, 48),  
+        // origin: new google.maps.Point(0,0), 
+        // anchor: new google.maps.Point(0, 48)       
+      },
+      5: {
+        icon: 'mapicon/homemade.png' 
+        // size: new google.maps.Size(48, 48),  
+        // origin: new google.maps.Point(0,0), 
+        // anchor: new google.maps.Point(0, 48)     
       }
     };
 
     function load() {
 
-      var array = [<?php echo $customer_position_lat.",".$customer_position_lng; ?>];
+      var latlng_array = 
+      [<?php 
+
+      $customer_position_lat = $_COOKIE["customer_position_lat"];
+
+      $customer_position_lng = $_COOKIE["customer_position_lng"]; 
+
+      echo $customer_position_lat.",".$customer_position_lng; ?>];
 
       var map = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(array[0],array[1]),
-        zoom: 13,
+        center: new google.maps.LatLng(latlng_array[0],latlng_array[1]),
+        zoom: 16,
         mapTypeId: 'roadmap'
       });
+
+      var newcenter = new google.maps.LatLng(latlng_array[0], latlng_array[1]);
+
+      var center_icon = {
+      url: 'mapicon/center.png',
+      // This marker is 20 pixels wide by 32 pixels tall.
+      size: new google.maps.Size(48, 48),
+      // The origin for this image is 0,0.
+      origin: new google.maps.Point(0,0),
+      // The anchor for this image is the base of the flagpole at 0,32.
+      anchor: new google.maps.Point(0, 48)
+      };
+
+      var marker = new google.maps.Marker({
+
+          map: map,
+          animation: google.maps.Animation.DROP,
+          position: newcenter,
+          icon: center_icon
+      });
+
       var infoWindow = new google.maps.InfoWindow;
 
       // Change this depending on the name of your PHP file
@@ -107,6 +150,28 @@
       });
     }
 
+    function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      
+
+        document.getElementById('lat').value = marker.getPosition().lat();
+        document.getElementById('lng').value = marker.getPosition().lng();
+
+      google.maps.event.addListener(marker,'dragend',function(event) {
+        document.getElementById('lat').value = this.getPosition().lat();
+        document.getElementById('lng').value = this.getPosition().lng();
+    });
+
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
     function bindInfoWindow(marker, map, infoWindow, html) {
       google.maps.event.addListener(marker, 'click', function() {
         infoWindow.setContent(html);
@@ -131,6 +196,20 @@
     }
 
     function doNothing() {}
+
+    function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = new google.maps.LatLng(
+          position.coords.latitude, position.coords.longitude);
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      address.setBounds(circle.getBounds());
+    });
+  }
+}
 
     //]]>
   </script>
@@ -280,7 +359,7 @@
       </div>
 
       <div class="search" style="text-align:center;">
-        <form class="business_info" action="search_data_send.php" method="post">
+        <form class="business_info" action="search2.php" method="post">
 
         <!--<label style="margin-right: 65px;">First name:</label>
         <input type="text" name="fn"><br>
@@ -323,51 +402,6 @@
         <button type="submit" id="b_info_update" style="width: 50px; margin-top: 20px;">Search</button>
         
         </form>
-
-        <?php
-
-    include ("dbconnector.php");
-
-    $connection = mysqli_connect($servername, $username, $password);
-    if (!$connection) {
-    die('Not connected : ' . mysqli_connect_error());
-    }
-
-// Set the active MySQL database
-    $db_selected = mysqli_select_db($connection,$database);
-    if (!$db_selected) {
-    die ('Can\'t use db : ' . mysqli_connect_error());
-    }
-
-    $cuisines = $_COOKIE["cuisines_type"];
-
-    // Select all the rows in the markers table
-    $query = "SELECT business_id, business_name, business_address, business_address_lat, business_address_lng ,cuisine_type_id FROM business WHERE cuisine_type_id='$cuisines'";
-
-    $result = mysqli_query($connection, $query);
-
-    $business_id = array();
-    while ($row = mysqli_fetch_array($result)){
-    $business_id[] = $row['business_id'];
-    }
-
-
-    // $customer_position_lat=$_COOKIE["customer_position_lat"];
-    // $customer_position_lat = $POST_['lat'];
-    // $customer_position_lng=$_COOKIE["customer_position_lng"];
-    // $customer_position_lng = $POST_['lng'];
-    
-
-
-   $comma_separated = implode(",", $business_id);
-
-   echo $comma_separated; // lastname,email,phone
-
-// Empty string when using an empty array:
-   var_dump(implode('hello', array())); // string(0) ""
-
-    ?> 
-
 
       </div>       
     

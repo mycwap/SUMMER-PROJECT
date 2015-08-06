@@ -253,13 +253,16 @@ function geolocate() {
         <input type="text" name="fn"><br>
         <label style="margin-right: 65px;">Last name:</label>
         <input stype="text" name="ln"><br>-->
-        <label class="typechoose" for="deliver">Ask for Delivery</label>
-          <input class="choose" type="radio" name="deliver" id="delivery" value="1"><label class="typechoose">or Collect</label>
+          <label class="typechoose" for="deliver">Ask for Delivery</label>
+          <input class="choose" type="radio" name="deliver" id="delivery" value="1">
+
+          <label class="typechoose">or Collect</label>
           <input class="choose" type="radio" name="deliver" id="delivery" value="2">
 
           <br>
           <label style="margin-right: 46px;">Cuisine Type:</label>
         <select id="foodtype" name="cuisine_type">
+          <!--the search functional value is cuisine_type_id-->
             <option value="1">Chinese</option>
             <option value="2">Japanese</option>
             <option value="3">Irish</option>

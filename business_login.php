@@ -167,6 +167,7 @@ function geolocate() {
         <label style="margin-right: 40px;">Business Type:</label>
         <select id="b_foodtype" name="business_type">
             <option value="homemade">Homemade</option>
+            <!--restaurant option has been delete but not from database-->
             <option value="takeaway">Takeaway</option>
             <option value="delifood">Deli food</option>
             <option value="fastfood">Fast food</option>
