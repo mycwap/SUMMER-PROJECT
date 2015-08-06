@@ -168,7 +168,6 @@ function geolocate() {
         <select id="b_foodtype" name="business_type">
             <option value="homemade">Homemade</option>
             <option value="takeaway">Takeaway</option>
-            <option value="restaurant">Restaurant</option>
             <option value="delifood">Deli food</option>
             <option value="fastfood">Fast food</option>
 
@@ -182,7 +181,7 @@ function geolocate() {
         <br>
         <input type="hidden" name="lat" id="lat">
         <br>
-        <input type="hidden" name="lng" id="lng">
+        <input type="hidden" name="lng" id="lng">   <!-- 180到184 在一起 -->
 
 
         <br>
