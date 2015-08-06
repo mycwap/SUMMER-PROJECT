@@ -1,5 +1,5 @@
 <?php 
-include ("dbinfo.php");
+include ("dbinfo_li.php");
 
 
         $btype=$_POST['business_type'];
@@ -21,7 +21,7 @@ include ("dbinfo.php");
  
 $sql1 = "SELECT owner_id FROM owner_business WHERE email = '$email' and username = '$username'";  
 
-$result = $conn->query($sql1);
+$result = $connection->query($sql1);
 
 if ($result->num_rows > 0) {
      // output data of each row
