@@ -174,7 +174,7 @@ function geolocate() {
 
         </select><br>
 
-    
+        <label>Business address *</label>
         <input id="address" onFocus="geolocate()" type="textbox" name="business_address" placeholder="Street Number, City">
         <input type="button" value="Search Map" onclick="codeAddress()">
     
@@ -191,11 +191,11 @@ function geolocate() {
         <label style="margin-right: 44px;">City Address:</label>
         <input stype="text" name="business_city"><br>
 
-        <label style="margin-right: 30px;">Business Name:</label>
+        <label style="margin-right: 30px;">Business Name*:</label>
         <input stype="text" name="business_name"><br>
-        <label style="margin-right: 18px;">Business Contact:</label>
+        <label style="margin-right: 18px;">Business Contact*:</label>
         <input type="text" name="business_contact"><br>
-        <label style="margin-right: 32px;">Business Email:</label>
+        <label style="margin-right: 32px;">Business Email*:</label>
         <input type="text" name="business_email"><br>
 
         <label style="margin-right: 46px;">Cuisine Type:</label>

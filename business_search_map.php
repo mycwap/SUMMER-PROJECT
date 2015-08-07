@@ -1,5 +1,5 @@
 <?php
-include ("dbinfo.php");
+include ("dbinfo_li.php");
 
 function parseToXML($htmlStr) 
 { 
