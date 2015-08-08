@@ -23,7 +23,7 @@ else
         $cuisinetype=$_POST['cuisine_type'];
 
         $email=$_COOKIE["sign_email"];
-        $username=$_COOKIE["sign_username"];
+        $username=$_COOKIE["sign_username"];    
 
         $baddress=$_POST['business_address'];
         
@@ -31,7 +31,7 @@ else
 
         $bname=$_POST['business_name'];
         $bcontact=$_POST['business_contact'];
-        // setcookie("business_contact", $bcontact, time()+3600);        
+        setcookie("business_contact", $bcontact, time()+3600);        
         $bemail=$_POST['business_email'];
         $business_address_lat=$_POST['lat'];
         $business_address_lng=$_POST['lng'];

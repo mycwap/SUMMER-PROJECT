@@ -28,7 +28,7 @@ if (isset($_POST['submit']))  // 这里的save要和 type="submit" name="save" �
 			// $business_contact=$_COOKIE["business_contact"];	
 
 			echo "<h4>文件成功转移至 meal_image 文件夹</h4>";
-
+			$business_u_contact=$_COOKIE["business_contact"];
 			$mi = $_FILES['image']['name']; //图片			
 			$mn =$_POST['meal_name'];
 			$mp = $_POST['meal_price'];
@@ -36,28 +36,29 @@ if (isset($_POST['submit']))  // 这里的save要和 type="submit" name="save" �
 			$mpt = $_POST['meal_prepared_time'];
 
 			
-			// $sql = "SELECT business_id FROM business ";
-			// $result = $connection->query($sql);
-			// if($result){
-			// 	while($row = $result->fetch_object()){
-			// 		$unique_business_id = $row->business_id;
-			// 	}
+			$sql = "SELECT business_id FROM business WHERE business_contact = '$business_u_contact'";
+			$result = $connection->query($sql);
+			if($result){
+				while($row = $result->fetch_object()){
+					$unique_business_id = $row->business_id;
+					echo "成功抽取 business_id";
+				}
 
-			// 	echo "Business_id : $unique_business_id ";
-			// }
-			// else{
-			// 	echo "fail to find the business_id";
-			// }
+				echo "Business_id : $unique_business_id ";
+			}
+			else{
+				echo "抽取 business_id 失败";
+			}
 
 			
 			$sql1="INSERT INTO meal (meal_name, meal_price, meal_description, meal_image_route, prepared_time, meal_allergen_id, meal_available, business_id)
-			VALUES('$mn', '$mp', '$md', '$mi', '$mpt','','', 2)";
+			VALUES('$mn', '$mp', '$md', '$mi', '$mpt','','', '$unique_business_id')";
 
 
   			$result1 = $connection->query($sql1);
   			if($result1)
   			{
-  				echo "<h1>成功将信息录入到数据库<br></h1>";
+  				echo "<h1>成功将信息+business_id 录入到数据库<br></h1>";
   			}
   			 
 		}	
@@ -132,7 +133,34 @@ if (isset($_POST['submit']))  // 这里的save要和 type="submit" name="save" �
 
 				// $business_contact=$_COOKIE["business_contact"];		
 
-				$sql = "SELECT * FROM meal ORDER BY time DESC ";
+				$business_u_contact=$_COOKIE["business_contact"];
+
+
+				$sqlx = "SELECT business_id FROM business WHERE business_contact = '$business_u_contact'";
+				$resultx = $connection->query($sqlx);
+				if($resultx){
+					while($rowx = $resultx->fetch_object()){
+						$unique_business_id = $rowx->business_id;
+						echo "成功抽取 business_id";
+					}
+
+					echo "Business_id : $unique_business_id ";
+				}
+				else{
+					echo "抽取 business_id 失败";
+				}
+
+
+
+
+
+
+
+
+
+
+
+				$sql = "SELECT * FROM meal   WHERE business_id = '$unique_business_id'  ORDER BY time DESC ";
 
 				$result = $connection->query($sql);
 				
