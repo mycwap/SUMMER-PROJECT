@@ -136,19 +136,19 @@ function geolocate() {
   </nav>
 
   <div class="modal fade" id="myModal">
-  <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <img class="modal-title" src="image/logo.png"/>         
-        </div>
-        
-        <div class="modal-footer">
-          <a href="#" data-dismiss="modal" class="btn">Close</a>
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <img class="modal-title" src="image/logo.png"/>         
+          </div>
+          
+          <div class="modal-footer">
+            <a href="#" data-dismiss="modal" class="btn">Close</a>
+          </div>
         </div>
       </div>
-    </div>
-</div>
+  </div>
 
  
   <div class="jumbotron">
@@ -158,7 +158,7 @@ function geolocate() {
     </div>
 
     <div class="search" style="text-align:center;">
-      <form class="business_info" action="business_info_send.php" method="post">
+      <form class="business_info" action="upload_carry_test.php" method="post" enctype="multipart/form-data">
 
         <!--<label style="margin-right: 65px;">First name:</label>
         <input type="text" name="fn"><br>
@@ -214,7 +214,11 @@ function geolocate() {
             <option value="Turkish">Turkish</option>
         </select><br>
         
-        <button type="submit" id="b_info_update" style="width: 50px; margin-top: 20px;">Next</button>
+        <label>Business Logo:</label>
+        <input type="file" name="logo" /> 
+        <br />
+        
+        <input type="submit" id="b_info_update" name="submit" value="next" style="width: 50px; margin-top: 20px;"/>
         
       </form>
 
