@@ -1,16 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "dream900412";
-$dbname = "spdb";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-     die("Connection failed: " . $conn->connect_error);
-} 
+include ("dbinfo.php");
 
  
         $email=$_POST['email'];

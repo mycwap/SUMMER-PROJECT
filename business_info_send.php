@@ -1,5 +1,5 @@
 <?php 
-include ("dbinfo_li.php");
+include ("dbinfo.php");
 
 
         $btype=$_POST['business_type'];
@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
 
 $sql2 = "SELECT business_type_id FROM business_type WHERE business_type_name = '$btype'";  
 
-$result = $conn->query($sql2);
+$result = $connection->query($sql2);
 
 if ($result->num_rows > 0) {
      // output data of each row
@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
 
 $sql3 = "SELECT business_area_id FROM business_city WHERE business_area_name = '$bcity'";  
 
-$result = $conn->query($sql3);
+$result = $connection->query($sql3);
 
 if ($result->num_rows > 0) {
      // output data of each row
@@ -54,7 +54,7 @@ if ($result->num_rows > 0) {
 
 $sql5 = "SELECT cuisine_type_id FROM cuisine_type WHERE cuisine_name = '$cuisinetype'";  
 
-$result = $conn->query($sql5);
+$result = $connection->query($sql5);
 
 if ($result->num_rows > 0) {
      // output data of each row
@@ -68,10 +68,10 @@ if ($result->num_rows > 0) {
 $sql4 = "INSERT INTO business (business_name, business_contact ,business_email, owner_id, business_type_id, business_area_id, business_address, business_address_lat, business_address_lng, cuisine_type_id)
 VALUES ('$bname', '$bcontact', '$bemail', '$owner_id', '$business_type_id', '$business_area_id', '$baddress', '$business_address_lat', '$business_address_lng', '$cuisine_type_id')";
 
-if ($conn->query($sql4) === TRUE) 
+if ($connection->query($sql4) === TRUE) 
 {
     
     header('Location: business_login.php');
 } 
-$conn->close();
+$connection->close();
 ?>

@@ -1,32 +1,6 @@
 <?php
 
-$servername = "localhost";
-$name = "root";
-$password = "dream900412";
-$dbname = "spdb";
-
-
-
-
-
-
-// $connection=mysql_connect ('localhost', $username, $password);
-// if (!$connection) {  die('Not connected : ' . mysql_error());}
-
-// // Set the active MySQL database
-
-// $db_selected = mysql_select_db($database, $connection);
-// if (!$db_selected) {
-//   die ('Can\'t use db : ' . mysql_error());
-// }
-
-// Opens a connection to a MySQL server
-$conn = new mysqli($servername, $name, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-     die("Connection failed: " . $conn->connect_error);
-}
-// Select all the rows in the markers table
+include ("dbinfo.php");
 
 
 $center_lat = $_GET["lat"];

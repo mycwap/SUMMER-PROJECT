@@ -63,12 +63,26 @@ function codeAddress() {
 
     if (status == google.maps.GeocoderStatus.OK) {
       map.setCenter(results[0].geometry.location);
+
+      var center_icon = {
+      url: 'mapicon/center.png',
+      // This marker is 20 pixels wide by 32 pixels tall.
+      size: new google.maps.Size(48, 48),
+      // The origin for this image is 0,0.
+      origin: new google.maps.Point(0,0),
+      // The anchor for this image is the base of the flagpole at 0,32.
+      anchor: new google.maps.Point(0, 48)
+      };
+
       var marker = new google.maps.Marker({
+
           map: map,
           draggable: true,
           animation: google.maps.Animation.DROP,
-          position: results[0].geometry.location
+          position: results[0].geometry.location,
+          icon: center_icon
       });
+      
 
         document.getElementById('lat').value = marker.getPosition().lat();
         document.getElementById('lng').value = marker.getPosition().lng();
@@ -145,8 +159,8 @@ function geolocate() {
        <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1">   
           <ul class="nav navbar-nav ">                                               
             
-            <li><a href="#">How It Works</a></li>
-            <li><a href="#myModal" data-toggle="modal" data-target="#myModal">Log-in</a></li>
+            <li><a href="#myModal" data-toggle="modal" data-target="#myModal">Customer </a></li>
+            <li><a href="#myModal" data-toggle="modal" data-target="#myModal3"> Delivers</a></li>
           </ul>
        </div>
     </div>
@@ -165,7 +179,7 @@ function geolocate() {
             <div class="col-md-6 " >
               <form id="loginform" action="login_send.php" method="post" onsubmit="return logincheck()">
                 <div class="form-group">
-                  <h3 class="login-title">User Login:</h3>
+                  <h3 class="login-title">Login (Customer):</h3>
                         
                   <input id="email" class="form-control" placeholder="Enter email" type="email" name="email">
                     <br>
@@ -193,7 +207,7 @@ function geolocate() {
             <div class="col-md-6 signin-area">
               <form id="registration" action="registration_send.php" method="post" onsubmit="return formcheck()">
                 <div class="form-group">
-                  <h3 class="signin-title">Sign up(User):</h3>    
+                  <h3 class="signin-title">Sign up (Customer):</h3>    
                     <input class="form-control" id="email" placeholder="Enter email" type="email" name="email">
                     <br>
                     <span id="error_email" style="color:red" ></span>
@@ -220,6 +234,100 @@ function geolocate() {
                     <span id="error_cpword" style="color:red" ></span>
                     <br>
                 </div>
+                <div class="checkbox-signin">
+                  <label>
+                    <input type="checkbox"> Keep me logged in to my account
+                  </label>  
+                </div>
+                <button type="submit" class="btn btn-default">Sign up</button>
+              </form>
+            </div>
+           
+        </div>
+      </div>
+      <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn">Close</a>
+      </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal3">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <img class="modal-title" src="image/logo.png"/>         
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-6 " >
+              <form id="loginform" action="deliveryman_login_send.php" method="post" onsubmit="return logincheck()">
+                <div class="form-group">
+                  <h3 class="login-title">Login (deliveryman):</h3>
+                        
+                  <input id="email" class="form-control" placeholder="Enter email" type="email" name="email">
+                    <br>
+                      <span id="error_email" style="color:red" ></span>
+                    <br>
+                </div>
+                <div class="form-group">
+                      
+                  <input id="password" class="form-control" id="password" placeholder="Password" type="password" name="password">
+                  <br>
+                  <span id="error_password" style="color:red"></span>
+                  <br>
+                </div>
+                <div class="checkbox-login">
+                  <label>
+                    <input type="checkbox"> Remember me
+                  </label>
+                    <p style="display:inline; margin-left:30px;"class="text-right"><a style="text-decoration: none;" href="#">Forgot password?</a>
+                    </p>
+                </div>
+                <button type="submit" class="btn btn-default">Login</button>     
+              </form>
+            </div>
+
+            <div class="col-md-6 signin-area">
+              <form id="registration" action="delivery_registration_send.php" method="post" onsubmit="return formcheck()">
+                <div class="form-group">
+                  <h3 class="signin-title">Sign up (deliveryman):</h3>    
+                    <input class="form-control" id="email" placeholder="Enter email" type="email" name="email">
+                    <br>
+                    <span id="error_email" style="color:red" ></span>
+                    <br>
+                </div>
+
+                <div class="form-group">                           
+                    <input class="form-control" id="mobile" placeholder="Mobile Number" type="type" name="mobile">
+                    <br>
+                    <span id="error_uname" style="color:red" ></span>
+                    <br>
+                </div>
+
+                <div class="form-group">                           
+                    <input class="form-control" id="username" placeholder="Username" type="type" name="username">
+                    <br>
+                    <span id="error_uname" style="color:red" ></span>
+                    <br>
+                </div>
+
+                <div class="form-group">                          
+                    <input class="form-control" id="password" placeholder="Password" type="password" name="password">
+                    <br>
+                    <span id="error_pword" style="color:red" ></span>
+                    <br>
+                </div>
+
+                <div class="form-group">                           
+                    <input class="form-control" id="cpassword" placeholder="Re-enter password" type="password" name="repassword">
+                    <br>
+                    <span id="error_cpword" style="color:red" ></span>
+                    <br>
+                </div>
+
                 <div class="checkbox-signin">
                   <label>
                     <input type="checkbox"> Keep me logged in to my account
@@ -312,7 +420,7 @@ function geolocate() {
               <div class="col-md-6 " >
                 <form action="business_owner_login.php" method="post">
                     <div class="form-group">
-                        <h3 class="login-title">Business Login:</h3>
+                        <h3 class="login-title">Login (Business):</h3>
                         
                         <input name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter owner's email" type="email">
                     </div>
@@ -334,7 +442,7 @@ function geolocate() {
                 <form action="business_owner_sign.php" method="post">
 
                     <div class="form-group">
-                      <h3 class="signin-title">Sign up(Business):</h3>
+                      <h3 class="signin-title">Sign up (Business):</h3>
                           
                       <input name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter owner's email" type="email">
                     </div>

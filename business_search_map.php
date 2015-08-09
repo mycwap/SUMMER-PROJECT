@@ -1,4 +1,5 @@
 <?php
+
 include ("dbinfo.php");
 
 function parseToXML($htmlStr) 

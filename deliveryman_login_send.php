@@ -7,19 +7,19 @@ include ("dbinfo.php");
         $password=$_POST['password'];
              
 
-$sql = "SELECT username FROM user WHERE email = '$email' and password = '$password'";
+$sql = "SELECT job_ranger_username FROM job_ranger WHERE job_ranger_email = '$email' and job_ranger_password = '$password'";
 
 
-$result = $conn->query($sql);
+$result = $connection->query($sql);
 
 if ($result->num_rows > 0) {
      // output data of each row
      while($row = $result->fetch_assoc()) {
-         $uname=$row["username"];
+         $uname=$row["job_ranger_username"];
          setcookie("username", $uname, time()+3600);
      }
  }
-header('Location: home_user.php');
+header('Location: mobile_deliveryman_home.php');
 
 $conn->close();
  

@@ -1,6 +1,6 @@
 <?php 
 
-include('dbinfo_li.php');
+include('dbinfo.php');
 
         $username=$_POST['owner_username']; 
         setcookie("sign_username", $username, time()+3600); 
