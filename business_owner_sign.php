@@ -22,5 +22,5 @@ if ($connection->query($sql) === TRUE)
 {
     header('Location: business_login.php');
 } 
-$conn->close();
+$connection->close();
 ?>

@@ -1,6 +1,10 @@
 <?php
+<<<<<<< HEAD
 
 include ("dbinfo.php");
+=======
+include ("dbinfo_li.php");
+>>>>>>> origin/master
 
 function parseToXML($htmlStr) 
 { 
