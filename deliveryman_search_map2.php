@@ -7,7 +7,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/customize.css" rel="stylesheet">
     <style>
-      #map-canvas {
+      #map {
         height: 400px;
         width: 100%;
         margin: 0;
@@ -16,34 +16,44 @@
 
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script type="text/javascript">
 
-    <script>
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see a blank space instead of the map, this
-// is probably because you have denied permission for location sharing.
-
-var map;
-
-function initialize() {
-  var mapOptions = {
-    zoom: 14
-  };
-  map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-
-  // Try HTML5 geolocation
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
-
-      var center_icon = {
-      url: 'mapicon/center.png',
-      // This marker is 48 pixels wide by 48 pixels tall.
+    var order_icon = {
+      url: 'mapicon/takeaway.png',
+      // This marker is 20 pixels wide by 32 pixels tall.
       size: new google.maps.Size(48, 48),
       // The origin for this image is 0,0.
       origin: new google.maps.Point(0,0),
-      // The anchor for this image is the base of the flagpole at 0,48.
+      // The anchor for this image is the base of the flagpole at 0,32.
+      anchor: new google.maps.Point(0, 48)
+      };
+
+      function load() {
+
+      var latlng_array = 
+      [<?php 
+
+      $deliveryman_position_lat = $_COOKIE["deliveryman_position_lat"];
+
+      $deliveryman_position_lng = $_COOKIE["deliveryman_position_lng"]; 
+
+      echo $deliveryman_position_lat.",".$deliveryman_position_lng; ?>];
+
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(latlng_array[0],latlng_array[1]),
+        zoom: 16,
+        mapTypeId: 'roadmap'
+      });
+
+      var newcenter = new google.maps.LatLng(latlng_array[0], latlng_array[1]);
+
+      var center_icon = {
+      url: 'mapicon/center.png',
+      // This marker is 20 pixels wide by 32 pixels tall.
+      size: new google.maps.Size(48, 48),
+      // The origin for this image is 0,0.
+      origin: new google.maps.Point(0,0),
+      // The anchor for this image is the base of the flagpole at 0,32.
       anchor: new google.maps.Point(0, 48)
       };
 
@@ -51,51 +61,63 @@ function initialize() {
 
           map: map,
           animation: google.maps.Animation.DROP,
-          position: pos,
+          position: newcenter,
           icon: center_icon
       });
 
-      document.getElementById('lat').value = marker.getPosition().lat();
-      document.getElementById('lng').value = marker.getPosition().lng();
+      var infoWindow = new google.maps.InfoWindow;
 
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'You are here.'
+      // Change this depending on the name of your PHP file
+      downloadUrl("deliveryman_order_search_map2.php", function(data) {
+        var xml = data.responseXML;
+        var markers = xml.documentElement.getElementsByTagName("deliveryman");
+        for (var i = 0; i < markers.length; i++) {
+          var name = markers[i].getAttribute("name");
+          var address = markers[i].getAttribute("address");
+          var type = markers[i].getAttribute("type");
+          var point = new google.maps.LatLng(
+              parseFloat(markers[i].getAttribute("lat")),
+              parseFloat(markers[i].getAttribute("lng")));
+          var html = "<b>" + name + "</b> <br/>" + address;
+
+          var marker = new google.maps.Marker({
+            map: map,
+            position: point,
+            icon: order_icon   
+          });
+          bindInfoWindow(marker, map, infoWindow, html);
+        }
       });
-
-      map.setCenter(pos);
-    }, function() {
-      handleNoGeolocation(true);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-      handleNoGeolocation(false);
-      }
     }
 
-    function handleNoGeolocation(errorFlag) {
-    if (errorFlag) {
-    var content = 'Error: The Geolocation service failed.';
-      } else {
-    var content = 'Error: Your browser doesn\'t support geolocation.';
-      }
+    function bindInfoWindow(marker, map, infoWindow, html) {
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.setContent(html);
+        infoWindow.open(map, marker);
+      });
+    }
 
-      var options = {
-        map: map,
-        position: new google.maps.LatLng(60, 105),
-        content: content
-        };
+    function downloadUrl(url, callback) {
+      var request = window.ActiveXObject ?
+          new ActiveXObject('Microsoft.XMLHTTP') :
+          new XMLHttpRequest;
 
-        var infowindow = new google.maps.InfoWindow(options);
-        map.setCenter(options.position);
-      }
+      request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+          request.onreadystatechange = doNothing;
+          callback(request, request.status);
+        }
+      };
 
-      google.maps.event.addDomListener(window, 'load', initialize);
+      request.open('GET', url, true);
+      request.send(null);
+    }
 
+    function doNothing() {}
     </script>
-  </head>
-  <body>
+
+    </head>
+  <body onload="load()">
   <nav class="navbar navbar-default navbar-customize navbar-fixed-top" role="navigation">
     
     <div class="container">
@@ -183,13 +205,16 @@ function initialize() {
 
               <input type="submit" value="Check">
               <br>
+              <div id="map" style="width: 500px; height: 300px"></div>
             </div>
           </form>
 
           
         </div>
 
-        <div id="map-canvas"></div>
+         
+          <br>
+
       </div> 
           
   </div>

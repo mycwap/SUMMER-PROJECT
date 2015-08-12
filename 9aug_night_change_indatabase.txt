@@ -1,0 +1,16 @@
+在business表中加入delivery_ability & logo_route
+ALTER TABLE `business` ADD `deliver_ability` INT(11) NOT NULL AFTER `business_id`, ADD `logo_route` VARCHAR(255) NULL DEFAULT NULL AFTER `deliver_ability`;
+
+删除order里job_ranger_id外键及primary key
+ALTER TABLE `order`
+  DROP PRIMARY KEY,
+   ADD PRIMARY KEY(
+     `job_ranger_id`);
+     
+ALTER TABLE `order`
+  DROP PRIMARY KEY,
+   ADD PRIMARY KEY(
+     `job_ranger_id`);
+     
+将order中dispatch_time数据类型暂时改为varchar方便录入查找和免去转化hh:mm:ss -> datetime -> hh:mm:ss
+UPDATE `spdb`.`order` SET `dispatch_time` = '10:00' WHERE `order`.`order_id` = 1 AND `order`.`user_id` = 28 AND `order`.`business_id` = 2; UPDATE `spdb`.`order` SET `dispatch_time` = '10:00' WHERE `order`.`order_id` = 2 AND `order`.`user_id` = 29 AND `order`.`business_id` = 4; UPDATE `spdb`.`order` SET `dispatch_time` = '10:00' WHERE `order`.`order_id` = 3 AND `order`.`user_id` = 30 AND `order`.`business_id` = 6; UPDATE `spdb`.`order` SET `dispatch_time` = '10:00' WHERE `order`.`order_id` = 4 AND `order`.`user_id` = 31 AND `order`.`business_id` = 9;

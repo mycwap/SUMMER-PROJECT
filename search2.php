@@ -20,7 +20,7 @@
 				<div>
 					<?php
 					
-						include ("dbinfo_li.php");
+						include ("dbinfo.php");
 
 						$business_id = $_COOKIE["business_i_string"];
 

@@ -92,16 +92,19 @@ body { height: 100%; margin: 0; padding: 0 }
     function computeTotalDistance(result) {
         var total = 0;
         var myroute = result.routes[0];
-        for (i = 0; i < myroute.legs.length; i++) {
+        for (i = 0; i < myroute.legs.length; i++) 
+        {
             total += myroute.legs[i].distance.value;
         }
         total = total / 1000;
 
         var selectedUnits = document.getElementById("units").value;
 
-        if (selectedUnits == "IMPERIAL") {
+        if (selectedUnits == "IMPERIAL") 
+        {
             document.getElementById("total").innerHTML = (Math.round((total* 0.6214)*100)/100) + " miles";
-        } else {
+        } 
+        else {
             document.getElementById("total").innerHTML = total + " kilometres";
         }
     }

@@ -10,7 +10,7 @@ include ("dbinfo.php");
 $sql = "SELECT username FROM user WHERE email = '$email' and password = '$password'";
 
 
-$result = $conn->query($sql);
+$result = $connection->query($sql);
 
 if ($result->num_rows > 0) {
      // output data of each row
@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
  }
 header('Location: home_user.php');
 
-$conn->close();
+$connection->close();
  
 
 ?>

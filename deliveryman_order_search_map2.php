@@ -24,13 +24,21 @@ $db_selected = mysqli_select_db($connection,$database);
 if (!$db_selected) {
   die ('Can\'t use db : ' . mysqli_connect_error());
 }
+  
 
-$cuisines = $_COOKIE["cuisines_type"];
+$dispatch_time = $_COOKIE["dispatch_time2"];
 
-// Select all the rows in the markers table
-$query = "SELECT business_id, business_name, business_address, business_address_lat, business_address_lng ,cuisine_type_id, business_type_id FROM business WHERE cuisine_type_id='$cuisines'";
+// $dispatch_time = ;
 
-$result = mysqli_query($connection, $query);
+
+$sql = "SELECT order_customer_id, order_address, order_address_lat, order_address_lng,deliveryman_type FROM order_customer WHERE order_dispatch='$dispatch_time'";
+
+$result = mysqli_query($connection,$sql)
+  or die("Error:".mysqli_error($connection));
+
+// $sql = "SELECT order_id, user_id FROM order WHERE dispatch_time='$dispatch_time'";
+// $result = mysqli_query($connection, $sql);
+
 
 if (!$result) {
   die('Invalid query: ' . mysqli_connect_error());
@@ -44,12 +52,12 @@ echo '<markers>';
 // Iterate through the rows, printing XML nodes for each
 while ($row = mysqli_fetch_assoc($result)){
   // ADD TO XML DOCUMENT NODE
-  echo '<business ';
-  echo 'name="' . parseToXML($row['business_name']) . '" ';
-  echo 'address="' . parseToXML($row['business_address']) . '" ';
-  echo 'lat="' . $row['business_address_lat'] . '" ';
-  echo 'lng="' . $row['business_address_lng'] . '" ';
-  echo 'type="' . $row['business_type_id'] . '" ';
+  echo '<deliveryman ';
+  echo 'name="' . parseToXML($row['order_customer_id']) . '" ';
+  echo 'address="' . parseToXML($row['order_address']) . '" ';
+  echo 'lat="' . $row['order_address_lat'] . '" ';
+  echo 'lng="' . $row['order_address_lng'] . '" ';
+  echo 'type="' . $row['deliveryman_type'] . '" ';
   echo '/>';
 }
 

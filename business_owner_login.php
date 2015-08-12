@@ -27,7 +27,7 @@ setcookie('username', $_POST['username'], time()+60*60*24*365, 'www.UNI.edu.au')
 //ddddddd
 
 
-$result = $conn->query($sql);
+$result = $connection->query($sql);
 
 if ($result->num_rows > 0) {
      // output data of each row
@@ -38,7 +38,7 @@ if ($result->num_rows > 0) {
  }
 header('Location:business_login.php');
 
-$conn->close();
+$connection->close();
  
 /*mysql_query("set NAMES GB2312");
 //$rs = mysql_query($q, $conn); //获取数据集

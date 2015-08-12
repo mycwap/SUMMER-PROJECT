@@ -23,7 +23,7 @@
 
     </style>
     <?php
-    include ("dbinfo_li.php");
+    include ("dbinfo.php");
     $cuisines = $_COOKIE["cuisines_type"];
     // Select all the rows in the markers table
     $query = "SELECT business_id, business_name, business_address, business_address_lat, business_address_lng ,
