@@ -70,7 +70,8 @@ if (isset($_GET['ide']))
               $b_name = $row->business_name;
               $b_address = $row->business_address;   
               
-              
+               // echo "经度$business_lat<br>";
+               // echo "维度$business_lng<br>";
 
               $c_type_name = $row->cuisine_name;
               $b_type_name = $row->business_type_name;

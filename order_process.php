@@ -1,7 +1,6 @@
 <?php
-
-$business_lat = $_COOKIE["business_lat"];
-$business_lng = $_COOKIE["business_lng"];
+// $business_lat = $_COOKIE["business_lat"];
+// $business_lng = $_COOKIE["business_lng"];
 include_once("dbinfo_li.php");
 $meal_id = $_GET['ide'];
 if (isset($_GET['ide']))    
@@ -53,6 +52,8 @@ else{
 var address;
 var geocoder;
 var map;
+var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay;
 
 function initialize() {
   var myLatlng = new google.maps.LatLng(51.893609,-8.49119769999993);
@@ -117,72 +118,132 @@ function geolocate() {
   }
 }
 
-function calculate(){
+
+function calculate() {
+
+      // var od = id;
+
+      // var bat = 'b_a_lat' + id;
+      // var bag = 'b_a_lng' + id;
+
+      // var oat = 'o_a_lat' + id;
+      // var oag = 'o_a_lng' + id;
+
+      var latlng_array = 
+      [<?php 
+
+      $business_position_lat = $_COOKIE["business_lat"];
+
+      $business_position_lng = $_COOKIE["business_lng"]; 
+
+      echo $business_position_lat.",".$business_position_lng;?>];
+
+      var order_position = new google.maps.LatLng(latlng_array[0], latlng_array[1]);
 
 
+        var o_a_lat = document.getElementById('lat').value;
+        var o_a_lng = document.getElementById('lng').value;
 
-}
+        
+        var myLatlng2 = new google.maps.LatLng(o_a_lat,o_a_lng);
+        
 
-var service = new google.maps.DistanceMatrixService();
-     var places = [{lat:40.7143528, lng:-74.0059731},
-                   {lat:40.735657, lng:-74.1723667},
-                   {lat:34.0522342, lng:-118.2436849},
-                   {lat:32.7766642, lng:-96.796987}];
-     var foundlatlng = new google.maps.LatLng(40.65, -73.95); // Brooklyn, NY
-     var goto = [];
-     for (var i=0;i<places.length;i++){
-        goto.push(new google.maps.LatLng(places[i].lat, places[i].lng));
-     }    
-     var service = new google.maps.DistanceMatrixService();//request distance matrix
-     var outputdiv = document.getElementById('info');
+        var myOptions = {
+            zoom: 14,
+            center: order_position,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
 
-//     var goto = new google.maps.LatLng(places[i].lat, places[i].lng);address:"Dallas, TX", address:"Newark, NJ", address:"New York, NY", 
-    function callback(response, status) {
-    var distancefield = distancefield;
-      if (status == google.maps.DistanceMatrixStatus.OK) {
-        var origins = response.originAddresses;
-        var destinations = response.destinationAddresses;
-        var results = response.rows[0].elements;
-        var htmlString = "<table border='1'>"; 
-        for (var r = 0; r < results.length; r++) {
-            var element = results[r];
-            var distancetext = element.distance.text;
-            var durationtext = element.duration.text;
-            var to = destinations[r];
-            htmlString += "<tr><td>"+response.originAddresses[0]+"</td><td>"+to+"</td><td>"+distancetext+"</td><td>"+durationtext+"</td></tr>";
-        }//end for r
-        htmlString += "</table>"; 
-        document.getElementById('info').innerHTML = htmlString; 
-          
+        var infowindow = new google.maps.InfoWindow({
+            content: ''
+        });
 
-      }//end if status=ok
-    }//end callback
+        var center_icon = {
+      url: 'mapicon/takeaway.png',
+      // This marker is 48 pixels wide by 48 pixels tall.
+      size: new google.maps.Size(48, 48),
+      // The origin for this image is 0,0.
+      origin: new google.maps.Point(0,0),
+      // The anchor for this image is the base of the flagpole at 0,48.
+      anchor: new google.maps.Point(0, 48)
+      };
 
-//    console.log(places);
+      var marker = new google.maps.Marker({
 
-       var map;
-       var geocoder = new google.maps.Geocoder();         
-       function initialize() {
-         var mapOptions = {
-           zoom: 8,
-           center: foundlatlng,
-           mapTypeId: google.maps.MapTypeId.ROADMAP
-         };
-         map = new google.maps.Map(document.getElementById('map_canvas'),
-             mapOptions);
+          map: map,
+          animation: google.maps.Animation.DROP,
+          position: order_position,
+          icon: center_icon
+      });
 
-            service.getDistanceMatrix(
-              {
-                origins: [foundlatlng],
-                destinations: goto,
-                travelMode: google.maps.TravelMode.DRIVING,
-                unitSystem: google.maps.UnitSystem.IMPERIAL,
-                avoidHighways: false,
-                avoidTolls: false,
-              }, callback);//end service.getdistancematrix()
+        directionsDisplay = new google.maps.DirectionsRenderer({
+            
+            map: map, 
+            markerOptions: {
+            
+            },
+            panel: document.getElementById("directionsPanel"),
+            infoWindow: infowindow
+        });
+
+            
+            // var arrLatLon = new google.maps.LatLng(o_a_lat,o_a_lng);
+
+          // arrLatLon = new google.maps.LatLng(51.891327,-8.470776);
+
+
+          google.maps.event.addListener(directionsDisplay, 'directions_changed', function() {
+            computeTotalDistance(directionsDisplay.directions);
+        });
+
+        // only seems possible to display 1 directions at a time?
+        // calcRoute();
+        var selectedMode = document.getElementById("mode").value;
+        var selectedUnits = document.getElementById("units").value;
+
+        // if(typeof(id) != "undefined"){
+        //     destinationID = id;
+        // }
+
+        var request1 = {
+            origin: order_position,
+            destination:myLatlng2,
+            travelMode: google.maps.DirectionsTravelMode[selectedMode],
+            unitSystem: google.maps.UnitSystem[selectedUnits]
+        };
+
+        directionsService.route(request1, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            }
+        });
+    }
+
+   
+
+    function computeTotalDistance(result) {
+        var total = 0;
+        var total1 = 0;
+        var myroute = result.routes[0];
+        for (i = 0; i < myroute.legs.length; i++) {
+            total += myroute.legs[i].distance.value;
         }
-      
-      google.maps.event.addDomListener(window, 'load', initialize);
+        total = total / 1000;
+        total1 = total;
+
+        var selectedUnits = document.getElementById("units").value;
+
+        if (selectedUnits == "IMPERIAL") {
+            document.getElementById("total").innerHTML = (Math.round((total* 0.6214)*100)/100) + " miles";
+            document.getElementById("total1").innerHTML = (Math.round((total1* 0.6214)*100)/100) + " miles";
+        } else {
+            document.getElementById("total").innerHTML = total + " kilometres";
+            document.getElementById("total1").innerHTML = total1 + " kilometres";
+        }
+    }
+
+
 
 
   </script>
@@ -208,11 +269,14 @@ var service = new google.maps.DistanceMatrixService();
         <br>
         <input type="hidden" name="lng" id="lng"> 
 
-
-
+        
+      
         <button type="button" onclick="calculate()">Get distance</button>
 
-        <input type="text" name="" id="distance">
+        <p>Total Distance: <span id="total"></span></p>
+
+        <input type="hidden" name="distance" id="total1"><br>
+          
 
        <label>order delivery fee </label>     
 
@@ -253,6 +317,21 @@ var service = new google.maps.DistanceMatrixService();
        <input type="submit" name="submit" value="Submit"/>
 
 </form>
+
+		<div>
+          <strong>Mode of Travel: </strong>
+          <select id="mode" onchange="initialize()">
+            <option value="WALKING" selected="selected">Walking</option>
+          </select>
+		</div>
+
+        <div>
+          <strong>Measurement units: </strong>
+          <select id="units" onchange="initialize()">
+            <option value="IMPERIAL" selected="selected">Miles</option>
+            <option value="METRIC ">Kilometres</option>
+          </select>
+        </div>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 </body>
