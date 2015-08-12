@@ -359,7 +359,7 @@
       </div>
 
       <div class="search" style="text-align:center;">
-        <form class="business_info" action="search2.php" method="post">
+        <form class="business_info" action="business_deliverable_judge.php" method="post">
 
         <!--<label style="margin-right: 65px;">First name:</label>
         <input type="text" name="fn"><br>

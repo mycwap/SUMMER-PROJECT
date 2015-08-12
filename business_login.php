@@ -213,6 +213,13 @@ function geolocate() {
             <option value="Thai">Thai</option>
             <option value="Turkish">Turkish</option>
         </select><br>
+
+        <label>Delivery Ability:</label>
+        <input type="radio" name="deliverable" value="1">Yes
+        <input type="radio" name="deliverable" value="0">No
+        <br>
+ 
+
         
         <label>Business Logo:</label>
         <input type="file" name="logo" /> 

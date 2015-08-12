@@ -29,6 +29,8 @@ else
         
         $bcity=$_POST['business_city'];
 
+        $deliver = $_POST['deliverable'];
+
         $bname=$_POST['business_name'];
         $bcontact=$_POST['business_contact'];
         setcookie("business_contact", $bcontact, time()+3600);        
@@ -83,8 +85,8 @@ if ($result->num_rows > 0) {
 
 
 
-$sql4 = "INSERT INTO business (business_name, business_contact ,business_email, owner_id, business_type_id, business_area_id, business_address, business_address_lat, business_address_lng, cuisine_type_id, logo_route)
-VALUES ('$bname', '$bcontact', '$bemail', '$owner_id', '$business_type_id', '$business_area_id', '$baddress', '$business_address_lat', '$business_address_lng', '$cuisine_type_id','$b_logo')";
+$sql4 = "INSERT INTO business (deliver_ability, business_name, business_contact ,business_email, owner_id, business_type_id, business_area_id, business_address, business_address_lat, business_address_lng, cuisine_type_id, logo_route)
+VALUES ('$deliver','$bname', '$bcontact', '$bemail', '$owner_id', '$business_type_id', '$business_area_id', '$baddress', '$business_address_lat', '$business_address_lng', '$cuisine_type_id','$b_logo')";
 
 if ($connection->query($sql4) === TRUE) 
 {
