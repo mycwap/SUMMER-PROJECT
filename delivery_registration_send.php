@@ -1,6 +1,6 @@
 <?php 
 //delivery_registration_send.php
-include ("dbinfo.php");
+include ("dbinfo_li.php");
 
         $username=$_POST['username']; 
         setcookie("username", $username, time()+3600);       
@@ -20,5 +20,5 @@ if ($connection->query($sql) === TRUE)
 } 
 
 
-$conn->close();
+$connection->close();
 ?>

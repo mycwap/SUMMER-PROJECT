@@ -10,7 +10,7 @@
       #map {
         height: 400px;
         width: 100%;
-        margin: 0;
+        margin: 0 auto;
         padding: 0;
       }
 
@@ -262,19 +262,19 @@
       </button>
       
       
-      <a class="navbar-brand" href="#"><img class="modal-title" src="image/logo.png"/></a>
+      <a class="navbar-brand" href="#" style="font-size:30px;font-weight:border;">FunDeli</a>
       </div>
 
-      <b>Welcome:
-              <?php
-                echo $_COOKIE["username"];                
-              ?>
-      </b>
+      
 
       <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1">   
           <ul class="nav navbar-nav ">                                                  
             <li><a href="deliveryman_account.php">My account</a></li>
-
+            <b>Welcome:
+              <?php
+                echo $_COOKIE["username"];                
+              ?>
+      </b>
 
 
             <!-- ************需要增加链接************ -->
@@ -288,12 +288,9 @@
 
   <div class="jumbotron">
      
-      <div class="slogan">
-        <p>Fundeli</p>
-        <p>Business Home Page</p>
-      </div>
+     
 
-      <div class="search" style="text-align:center;">
+      <div class="search" style="text-align:center; width:60%">
 
         <div>
           <form action="dispatch_time_send2.php" method="post" role="form">
@@ -341,7 +338,7 @@
           </form>
           <br>
           <?php 
-          include ("dbinfo.php");
+          include ("dbinfo_li.php");
 
           $connection = mysqli_connect($servername, $username, $password);
           if (!$connection) {
