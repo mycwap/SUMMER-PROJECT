@@ -1,0 +1,156 @@
+/*=========通用部分
+
+/* ================ footer ============
+*/
+
+/*div {
+	border:1px solid black ;
+}
+*/
+/*table {
+	border:1px solid black ;
+}
+
+table, tr, td {
+    border: 1px solid black;
+}*/
+
+body {
+	margin-top: 80px;
+}
+
+
+
+
+.footer{
+	height:95px;
+	padding-top: 10px;
+	background-color: rgb(248, 248, 248);
+	border: 3px;
+	border-color: black;
+	color: rgb(118, 118, 118);
+}
+
+.footer a{
+	text-decoration: none;
+	color: rgb(118, 118, 118);
+}
+
+.footer-nav{
+	text-align: center;
+	list-style: none;
+	margin-bottom: 5px;
+}
+
+.footer-nav li{
+	display: inline;
+	padding:0px 10px;
+}
+
+.copyright{
+	text-align: center;
+}
+
+/*=========== footer 结束 ==============*/
+
+
+/*====通用结束=====*/
+
+
+.setting_middle{
+	margin-left:auto;
+	margin-right:auto; 
+}
+
+.no_padding{
+	padding: 0px 0px;
+}
+.no_margin{
+	margin:0px 0px;
+}
+
+/*.page_foot {
+	height: 50px;
+	background-color: #FF3300;
+}*/
+
+.middle_part {
+	width: 1130px;
+	background-color: #F0F0F0;
+}
+
+
+.order_info {
+	margin-top: 20px;
+	height: 100px;
+	width: 1130px;
+	background-color: #99CCFF;
+
+}
+
+.business_info_basic {
+	overflow: auto;
+}
+
+.business_info {
+    width: 610px;
+	float: left;
+	/*border-style: solid;
+    border-width: 5px;*/
+    overflow: auto;
+}
+
+.logo_image{
+	float: left;
+	
+}
+
+.b_spf_info{
+	float: left;
+    margin-left: 20px;
+    width: 502px;
+
+	/*border-style: solid;
+    border-width: 2px;*/
+}
+
+.info_header{
+	font-weight: bold;
+	font-size: 22px;
+}
+
+.table_title{
+	font-size: 15px;
+
+}
+
+.basic {
+	float: right;
+/*	border-style: solid;
+    border-width: 5px;*/
+}
+
+
+
+.logo_image{
+	height: 160px;
+	width: 160px;
+	 
+}
+
+
+.business_info table{
+	 
+	height: 160px;
+    width: 702px;
+
+}
+
+
+.basic table{
+	
+    height: 62px;
+	width: 300px;
+}
+
+

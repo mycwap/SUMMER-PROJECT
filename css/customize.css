@@ -1,5 +1,33 @@
+/*div, form, table {
+	border: 1px solid black ;
+}*/
+
+input,select {
+	border-radius: 5px;
+}
+
+.navbar-default {
+  background-color: #F44100;
+  border-color: #E7E7E7;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFF;
+}
+
+.jumbotron{
+	background-color: beige;
+}
+
+/*.tem_a{
+	color:green;
+	font-weight:bolder;
+}*/
+
+
 body{
-	background-color:rgb(237, 237, 237);
+	background-color:beige;;
+	margin-top: 80px;
 }
 
 
@@ -7,6 +35,11 @@ body{
 	padding: 0px 0px;
 }
 .no_margin{
+	margin:0px 0px;
+}
+
+.npm {
+	padding: 0px 0px;
 	margin:0px 0px;
 }
 
@@ -35,9 +68,12 @@ border-color:#E5E5E5;
 }
 
 .search{
-	width: 745px;
+	width: 800px;
+	height: 534px;
 	margin:30px auto 0px auto;
-	text-align: center;
+	background-color: rgb(224, 239, 255);
+	border-radius: 25px;
+	/*text-align: center;*/
 }
 
 .choose{
@@ -49,15 +85,15 @@ border-color:#E5E5E5;
 	font-size: 17px;
 }
 
-#address{
+/*#address{
 	width: 250px;
 	height: 35px;
-}
+}*/
 
-#foodtype{
+/*#foodtype{
 	width: 100px;
 	height: 35px
-}
+}*/
 
 #pressbutton{
 	width: 100px;
@@ -163,12 +199,12 @@ ul li{
 }
 
 .business_info{
-	width: 350px;
+	width: 500px;
 	margin: 0px auto;
-	text-align: right;
+	 
 }
 
-.business_info label{
+/*.business_info label{
 	font-weight: normal;
 }
 
@@ -176,26 +212,106 @@ ul li{
 	margin-bottom: 20px;
 	width: 170px;
 	height: 25px;
-}
+}*/
 
 #b_foodtype{
 	margin-bottom: 20px;
 	width: 170px;
 	height: 25px;
 }
+
+/*============ search1.php ===========*/
+
+.business_c_header{
+	width: 400px;
+    margin-left: 195px;
+    margin-top:90px;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+
+.business_container{
+    overflow: auto;
+    width: 870px;
+    margin:0 auto;
+    margin-bottom: 20px;
+
+}
+
+.business_c_logo {
+  float: left;
+  width: 132px;
+}
+
+
+.business_c_ul{
+	margin-top: 10px;
+    margin-left: 0px;
+    padding-left: 15px;
+
+}
+
+.business_c_ul li{
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+
+.business_c_info{
+	float: left;
+	width: 300px;
+	height: 130px;
+}
+
+
+.business_c_button{
+	float:right;
+	width: 100px;
+  	height: 30px;
+}
+
+.business_c_button button{
+	 
+	width: 100px;
+  	height: 30px;
+}
+
+.business_c_button a{
+	 text-decoration: none;
+}
+
+/*==============end of search1.php=========*/
+
+
+
+/*============ business_one_show =============*/
+
+
+
+
+/*============ end of  business_one_show =============*/
+
+
 /*============footer setting=====================*/
 
+#special_a{
+	color:white; 
+	 
+}
 
 .footer{
 	height:95px;
 	padding-top: 10px;
-	background-color: rgb(211, 205, 205);
+	background-color: rgb(247, 238, 235);
 	border: 3px;
 	border-color: black;
+	color: rgb(118, 118, 118);
 }
 
 .footer a{
 	text-decoration: none;
+	color: rgb(118, 118, 118);
 }
 
 .footer-nav{
