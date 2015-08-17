@@ -309,7 +309,7 @@ function initialize(id) {
       </button>
       
       
-      <a class="navbar-brand" href="#" style="font-size:30px;font-weight:border;">FunDeli</a>
+       <a class="navbar-brand" style="font-size: 30px;font-weight: 800; margin-top: 10px; " href="#">FunDeli</a>
       </div>
 
       
@@ -317,7 +317,7 @@ function initialize(id) {
       <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1" style="background-color: rgb(248, 248, 248);height: 121px;">   
           <ul class="nav navbar-nav " style="height: 80px;background-color: rgb(244, 65, 0);margin-top:0px;">                                               
             
-            <li><a href="#myModal" style="color:white; font-weight:border;">My account</a></li>
+            <li><a href="###" style="color:white; font-weight:border;">My account</a></li>
              
             <li style="margin-bottom: 0px;margin-top: 15px;font-weight: bolder;color: white;">Welcome:
                 <?php

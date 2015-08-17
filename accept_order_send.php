@@ -223,27 +223,23 @@
       </button>
       
       
-      <a class="navbar-brand" href="#" style="font-size:30px;font-weight:border;">FunDeli</a>
+       <a class="navbar-brand" style="font-size: 30px;font-weight: 800; margin-top: 10px; " href="#">FunDeli</a>
       </div>
 
       
 
-      <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1">   
-          <ul class="nav navbar-nav ">                                                  
-            <li><a href="deliveryman_account.php">My account</a></li>
-            <b>Welcome:
-              <?php
-                echo $_COOKIE["username"];                
-              ?>
-      </b>
-
-
-            <!-- ************需要增加链接************ -->
-
-
-
+      <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1" style="background-color: rgb(248, 248, 248);height: 121px;">   
+          <ul class="nav navbar-nav " style="height: 80px;background-color: rgb(244, 65, 0);margin-top:0px;">                                               
+            
+            <li><a href="###" style="color:white; font-weight:border;">My account</a></li>
+             
+            <li style="margin-bottom: 0px;margin-top: 15px;font-weight: bolder;color: white;">Welcome:
+                <?php
+                  echo $_COOKIE["username"];                
+                ?>
+            </li>
           </ul>
-      </div>
+       </div>
     </div>
   </nav>
 
@@ -251,7 +247,7 @@
      
      
 
-      <div class="search" style="text-align:center; width:60%">
+      <div class="search"style="text-align:center; width: 85%;height: 600px;">
 
         <div>
           <form action="dispatch_time_send2.php" method="post" role="form">
@@ -294,7 +290,7 @@
 
               <input type="submit" value="Check">
               <br>
-              <div id="map" style="width: 500px; height: 300px"></div>
+              <div id="map" style="width: 100%; height: 300px"></div>
             </div>
           </form>
           <br>
@@ -327,10 +323,20 @@
 
           echo '<b>Order number:'.$order_customer_id.'</b><br>';
 
-          echo '<table>';
-          echo '<tr><td></td><td></td><td>Start(business name)</td>
-                    <td>Business Address</td><td></td><td>Destination</td>
-                    <td>Dispatched By</td><td></td></tr>';
+          echo '<table style="width: 100%;margin-bottom: 10px;margin-top: 10px;">';
+          echo '<tr style="
+    font-weight: bold;
+">
+          <td></td>
+          <td></td>
+          <td>Start(business name)</td>
+          <td>Business Address</td>
+          <td></td>
+          <td>Destination</td>
+          <td>Dispatched By</td>
+          <td></td>
+
+          </tr>';
 
             $i = 1;
             while($row = mysqli_fetch_assoc($result)){
@@ -361,10 +367,32 @@
 
           ?>
 
-          <p>Total Distance: <span id="total"></span></p>
-          <br>
+          <p style="
+    width: 280px;
+    display: inline;
+">Total Distance: <span id="total"></span></p>
+         
 
-          <div id="directionsPanel" style="width:30%;height:300px"></div>
+         <!--  <div id="directionsPanel" style="width:30%;height:300px"></div> -->
+
+          <div style="
+    display: inline;
+    margin-left: 80px;
+">
+          <strong>Distance calculated by: </strong>
+          <select id="mode">
+            <option value="WALKING" selected="selected">Walking</option>
+          </select>
+        </div>
+
+        <div style="
+    display: inline;
+">
+          <strong>Measurement units by: </strong>
+          <select id="units">
+            <option value="IMPERIAL" selected="selected">Miles</option>
+          </select>
+        </div>
 
 
              
@@ -374,19 +402,7 @@
 
         <!--以下Mode of Travel & Measurement units无法工作，但是删除会影响其他功能，所以要保留 -->
 
-        <div>
-          <strong>Distance calculated by: </strong>
-          <select id="mode">
-            <option value="WALKING" selected="selected">Walking</option>
-          </select>
-        </div>
-
-        <div>
-          <strong>Measurement units by: </strong>
-          <select id="units">
-            <option value="IMPERIAL" selected="selected">Miles</option>
-          </select>
-        </div>
+       
 
          
         <br>
@@ -401,7 +417,7 @@
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Blog</a></li>
-        <li><a href="home.html" data-toggle="modal" data-target="#myModal2">Logout</a></li>
+        <li><a href="index.php" >Logout</a></li>
       </ul>
     </div>
        
