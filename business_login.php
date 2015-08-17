@@ -8,13 +8,13 @@
     <style>
       #map-canvas {
         height: 300px;
-        width: 400px;
+        width: 500px;
         margin: 0;
         padding: 0;
       }
 
       #address{
-        float: left;
+         
       }
 
       
@@ -104,12 +104,12 @@ function geolocate() {
     </style>
   </head>
   <body onload="initialize()"> 
-  <nav class="navbar navbar-default navbar-customize navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-default navbar-customize navbar-fixed-top" role="navigation" style="height: 81px;">
     
     <div class="container">
       <div class="navbar-header">
       
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-FunDeli-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-FunDeli-navbar-collapse-1" aria-expanded="false" style="margin-top: 20px;">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -117,14 +117,16 @@ function geolocate() {
       </button>
       
       
-      <a class="navbar-brand" href="#"><img class="modal-title" src="image/logo.png"/></a>
+       <a class="navbar-brand" style="font-size: 30px;font-weight: 800; margin-top: 10px;" href="#">FunDeli</a>
       </div>
 
        <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1">   
-          <ul class="nav navbar-nav ">                                               
+          <ul class="nav navbar-nav " style="
+    margin-top: 20px;
+">                                               
             
-            <li><a href="#">How It Works</a></li>
-            <b>Welcome:
+             
+            <b style="color:white; font-weight:border;">Welcome:
               <?php
               $_COOKIE["sign_email"];
               echo $_COOKIE["sign_username"];                
@@ -134,7 +136,6 @@ function geolocate() {
        </div>
     </div>
   </nav>
-
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -152,54 +153,62 @@ function geolocate() {
 
  
   <div class="jumbotron">
-    <div class="slogan">
-      <p>Fundeli</p>
-      <p>Business Home Page</p>
-    </div>
+    
 
-    <div class="search" style="text-align:center;">
+    <div class="search" style="
+    padding-top: 50px;
+    height: 820px;
+" >
       <form class="business_info" action="upload_carry_test.php" method="post" enctype="multipart/form-data">
 
-        <!--<label style="margin-right: 65px;">First name:</label>
-        <input type="text" name="fn"><br>
-        <label style="margin-right: 65px;">Last name:</label>
-        <input stype="text" name="ln"><br>-->
         <label style="margin-right: 40px;">Business Type:</label>
         <select id="b_foodtype" name="business_type">
             <option value="homemade">Homemade</option>
-            <!--restaurant option has been delete but not from database-->
             <option value="takeaway">Takeaway</option>
             <option value="delifood">Deli food</option>
             <option value="fastfood">Fast food</option>
 
         </select><br>
 
-        <label>Business address *</label>
-        <input id="address" onFocus="geolocate()" type="textbox" name="business_address" placeholder="Street Number, City">
+        <label>Business address</label>
+        <input id="address" onFocus="geolocate()" style="
+    margin-left: 22px;
+    width: 174px;
+" type="textbox" name="business_address" placeholder="Street Number, City" >
         <input type="button" value="Search Map" onclick="codeAddress()">
     
         <div id="map-canvas"></div>
-        <br>
+        
         <input type="hidden" name="lat" id="lat">
-        <br>
-        <input type="hidden" name="lng" id="lng">   <!-- 180到184 在一起 -->
+        
+        <input type="hidden" name="lng" id="lng">   
 
-
         <br>
+      
         <label style="margin-right: 32px;">Street Address:</label>
-        <input type="text" name="business_street"><br>
+        <input type="text" name="business_street" style="
+    margin-left: 8px;
+"><br>
         <label style="margin-right: 44px;">City Address:</label>
-        <input stype="text" name="business_city"><br>
+        <input stype="text" name="business_city" style="
+    margin-left: 9px;
+"><br>
 
-        <label style="margin-right: 30px;">Business Name*:</label>
-        <input stype="text" name="business_name"><br>
-        <label style="margin-right: 18px;">Business Contact*:</label>
+        <label style="margin-right: 30px;">Business Name:</label>
+        <input stype="text" name="business_name" style="
+    margin-left: 5px;
+"><br>
+        <label style="margin-right: 18px;">Business Contact:</label>
         <input type="text" name="business_contact"><br>
-        <label style="margin-right: 32px;">Business Email*:</label>
-        <input type="text" name="business_email"><br>
+        <label style="margin-right: 32px;">Business Email:</label>
+        <input type="text" name="business_email" style="
+    margin-left: 3px;
+"><br>
 
         <label style="margin-right: 46px;">Cuisine Type:</label>
-        <select id="b_foodtype" name="cuisine_type">
+        <select id="b_foodtype" name="cuisine_type" style="
+    margin-left: 5px;
+">
             <option value="American">American</option>
             <option value="Chinese">Chinese</option>
             <option value="French">French</option>
@@ -215,7 +224,9 @@ function geolocate() {
         </select><br>
 
         <label>Delivery Ability:</label>
-        <input type="radio" name="deliverable" value="1">Yes
+        <input type="radio" name="deliverable" value="1" style="
+    margin-left: 40px;
+">Yes
         <input type="radio" name="deliverable" value="0">No
         <br>
  

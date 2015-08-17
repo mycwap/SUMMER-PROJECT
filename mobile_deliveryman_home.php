@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -109,38 +110,44 @@ function initialize() {
       </button>
       
       
-      <a class="navbar-brand" href="#"><img class="modal-title" src="image/logo.png"/></a>
+     <a class="navbar-brand" style="font-size: 30px;font-weight: 800; margin-top: 10px; " href="#">FunDeli</a>
       </div>
 
-      <b>Welcome:
-              <?php
-                echo $_COOKIE["username"];                
-              ?>
-      </b>
+     
 
-      <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1">   
-          <ul class="nav navbar-nav ">                                                  
-            <li><a href="deliveryman_account.php">My account</a></li>
-
-
-
-            <!-- ************需要增加链接************ -->
-
-
-
+      <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1" style="background-color: rgb(248, 248, 248);height: 121px;">   
+          <ul class="nav navbar-nav " style="height: 80px;background-color: rgb(244, 65, 0);margin-top:0px;">                                               
+            
+            <li><a href="#myModal" style="color:white; font-weight:border;">My account</a></li>
+             
+            <li style="margin-bottom: 0px;margin-top: 15px;font-weight: bolder;color: white;">Welcome:
+                <?php
+                  echo $_COOKIE["username"];                
+                ?>
+            </li>
           </ul>
-      </div>
+       </div>
+
+ 
+
+
+
+
+
+
+
+
     </div>
   </nav>
 
-  <div class="jumbotron">
+  <div class="jumbotron" style="margin-top: 0px;padding: 20px;">
      
-      <div class="slogan">
+      <!-- <div class="slogan">
         <p>Fundeli</p>
         <p>Business Home Page</p>
-      </div>
+      </div> -->
 
-      <div class="search" style="text-align:center;">
+      <div class="search" style="text-align:center;width: 85%;">
 
         <div>
           <form action="dispatch_time_send.php" method="post" role="form">
@@ -200,7 +207,7 @@ function initialize() {
         <li><a href="#">About</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Blog</a></li>
-        <li><a href="home.html" data-toggle="modal" data-target="#myModal2">Logout</a></li>
+        <li><a href="index.php" >Logout</a></li>
       </ul>
     </div>
        

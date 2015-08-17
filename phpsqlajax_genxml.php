@@ -1,6 +1,6 @@
 <?php
 
-include ("dbinfo.php");
+include ("dbinfo_li.php");
 
 
 $center_lat = $_GET["lat"];

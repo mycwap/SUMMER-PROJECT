@@ -100,7 +100,7 @@
 
       var map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(latlng_array[0],latlng_array[1]),
-        zoom: 16,
+        zoom: 14,
         mapTypeId: 'roadmap'
       });
 
@@ -238,12 +238,12 @@
   </head>
 
   <body onload="load()"> 
-  <nav class="navbar navbar-default navbar-customize navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-default navbar-customize navbar-fixed-top" role="navigation" style="height: 81px;">
     
     <div class="container">
       <div class="navbar-header">
       
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-FunDeli-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-FunDeli-navbar-collapse-1" aria-expanded="false" style="margin-top: 20px;">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -251,17 +251,21 @@
       </button>
       
       
-      <a class="navbar-brand" href="#"><img class="modal-title" src="image/logo.png"/></a>
+      <a class="navbar-brand" style="font-size: 30px;font-weight: 800; margin-top: 10px;" href="#">FunDeli</a>
       </div>
 
-       <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1">   
-          <ul class="nav navbar-nav ">                                               
+       <div class="collapse navbar-collapse  navbar-right" id="bs-FunDeli-navbar-collapse-1" style="background-color: rgb(248, 248, 248);height: 121px;">   
+          <ul class="nav navbar-nav " style="height: 80px;background-color: rgb(244, 65, 0);margin-top:0px;">                                               
             
-            <li><a href="#">How It Works</a></li>
-            <li><a href="#myModal" data-toggle="modal" data-target="#myModal">Log-in</a></li>
+            <li><a href="#myModal" data-toggle="modal" data-target="#myModal"style="color:white; font-weight:border;">Customer</a></li>
+            <!-- <li><a href="#myModal" data-toggle="modal" data-target="#myModal3">Deliver</a></li> -->
+            <li style="margin-bottom: 0px;margin-top: 15px;font-weight: bolder;color: white;">Welcome:
+                <?php
+                  echo $_COOKIE["username"];                
+                ?>
+            </li>
           </ul>
        </div>
-    </div>
   </nav>
 
   <div class="modal fade" id="myModal">
@@ -351,55 +355,24 @@
 </div>
 
  
-  <div class="jumbotron">
+  <div class="jumbotron nmp">
      
-      <div class="slogan">
-        <p>Fundeli</p>
-        <p>Business Home Page</p>
-      </div>
+      
 
-      <div class="search" style="text-align:center;">
+      <div class="search" style="
+    padding-top: 50px;
+">
         <form class="business_info" action="business_deliverable_judge.php" method="post">
-
-        <!--<label style="margin-right: 65px;">First name:</label>
-        <input type="text" name="fn"><br>
-        <label style="margin-right: 65px;">Last name:</label>
-        <input stype="text" name="ln"><br>-->
-        <label class="typechoose" for="deliver">Ask for Delivery</label>
-          <input class="choose" type="radio" name="deliver" id="delivery" value="1"><label class="typechoose">or Collect</label>
-          <input class="choose" type="radio" name="deliver" id="delivery" value="2">
-
-          <br>
-          <label style="margin-right: 46px;">Cuisine Type:</label>
-        <select id="foodtype" name="cuisine_type">
-            <option value="4">American</option>
-            <option value="1">Chinese</option>
-            <option value="5">French</option>
-            <option value="3">Irish</option>
-            <option value="6">Italian</option>
-            <option value="10">Indian</option>
-            <option value="2">Japanese</option>
-            <option value="9">Mexican</option>
-            <option value="12">Middle East</option>
-            <option value="7">Spainish</option>
-            <option value="8">Thai</option>
-            <option value="11">Turkish</option>
-          </select><br>
-
-          <label style="width: 310px; float: left;">Find food nearby:&nbsp;
-          <input id="address" onFocus="geolocate()" type="textbox" name="business_address" placeholder="Street, City">
-          </label>
           
-          <input type="button" value="Search Map" onclick="codeAddress()">
-    
-          <div id="map" style="width: 500px; height: 300px"></div>
-          <br>
+          <button type="submit" id="b_info_update"  style="width: 106px;height: 25px;margin-left: 0px;float: right;margin-right: 0px;">Next</button>
+          <div id="map" style="width: 500px;"></div>
+          
           <input type="hidden" name="lat" id="lat">
           <br>
           <input type="hidden" name="lng" id="lng">
           <br>      
         
-        <button type="submit" id="b_info_update" style="width: 50px; margin-top: 20px;">Search</button>
+          
         
         </form>
 
@@ -508,7 +481,6 @@
         &commat; 2015 FunDeli
     </div>
   </div>
-
 
 
 

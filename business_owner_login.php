@@ -1,6 +1,6 @@
 <?php
 
-include ("dbinfo.php");
+include ("dbinfo_li.php");
 
  
         $email=$_POST['email'];
@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
          setcookie("sign_username", $uname, time()+3600);
      }
  }
-header('Location:business_login.php');
+header('Location:business_info_order.php');
 
 $connection->close();
  

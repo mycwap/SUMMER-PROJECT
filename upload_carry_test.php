@@ -17,24 +17,35 @@ else
     // echo "Type: " . $_FILES["logo"]["type"] . "<br />";
     // echo "Size: " . ($_FILES["logo"]["size"] / 1024) . " Kb<br />";
   
-    $b_logo = $_FILES['logo']['name'];
-
-     $btype=$_POST['business_type'];
-        $cuisinetype=$_POST['cuisine_type'];
-
-        $email=$_COOKIE["sign_email"];
-        $username=$_COOKIE["sign_username"];    
-
-        $baddress=$_POST['business_address'];
+        $b_logo = $_FILES['logo']['name'];
+        setcookie("logo", $b_logo,time()+10800);
         
+        $btype=$_POST['business_type'];
+        setcookie("business_type", $btype,time()+10800);
+        
+        $cuisinetype=$_POST['cuisine_type'];
+        setcookie("cuisinetype", $cuisinetype,time()+10800);
+       
+        $email=$_COOKIE["sign_email"];
+        setcookie("email", $email,time()+10800);
+        
+        $username=$_COOKIE["sign_username"];    
+        setcookie("username", $username,time()+10800);
+       
+        $baddress=$_POST['business_address'];
+        setcookie("baddress", $baddress,time()+10800);        
         $bcity=$_POST['business_city'];
-
+        
         $deliver = $_POST['deliverable'];
-
+        
         $bname=$_POST['business_name'];
+        setcookie("bname", $bname,time()+10800);
+        
         $bcontact=$_POST['business_contact'];
-        setcookie("business_contact", $bcontact, time()+3600);        
+        setcookie("bcontact", $bcontact, time()+10800);        
+        
         $bemail=$_POST['business_email'];
+        setcookie("bemail", $bemail, time()+10800);  
         $business_address_lat=$_POST['lat'];
         $business_address_lng=$_POST['lng'];
 

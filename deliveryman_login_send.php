@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
  }
 header('Location: mobile_deliveryman_home.php');
 
-$conn->close();
+$connection->close();
  
 
 ?>

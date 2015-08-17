@@ -1,5 +1,5 @@
 <?php 
-include ("dbinfo.php");
+include ("dbinfo_li.php");
 
 
         $dispatch_time=$_POST['dispatch_time'];

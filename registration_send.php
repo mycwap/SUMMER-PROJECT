@@ -1,6 +1,6 @@
 <?php 
 
-include ("dbinfo.php");
+include ("dbinfo_li.php");
 
         $username=$_POST['username']; 
         setcookie("username", $username, time()+3600);       
@@ -15,11 +15,11 @@ VALUES ('$username', '$email', '$password')";
 
 if ($connection->query($sql) === TRUE) 
 {
-    header('Location: home_user.php');
+    header('Location: home.php');
 } 
 
 
 
 
-$conn->close();
+$connection->close();
 ?>

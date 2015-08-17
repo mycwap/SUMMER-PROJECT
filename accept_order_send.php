@@ -299,7 +299,7 @@
           </form>
           <br>
           <?php 
-          include ("dbinfo.php");
+          include ("dbinfo_li.php");
 
           $connection = mysqli_connect($servername, $username, $password);
           if (!$connection) {

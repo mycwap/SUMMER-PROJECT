@@ -1,6 +1,6 @@
 <?php
 
-include ("dbinfo.php");
+include ("dbinfo_li.php");
 
  
         $email=$_POST['email'];
@@ -19,7 +19,7 @@ if ($result->num_rows > 0) {
          setcookie("username", $uname, time()+3600);
      }
  }
-header('Location: home_user.php');
+header('Location: home.php');
 
 $connection->close();
  

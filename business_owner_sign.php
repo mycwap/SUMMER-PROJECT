@@ -1,6 +1,6 @@
 <?php 
 
-include('dbinfo.php');
+include('dbinfo_li.php');
 
         $username=$_POST['owner_username']; 
         setcookie("sign_username", $username, time()+3600); 
@@ -13,14 +13,24 @@ include('dbinfo.php');
         $b_contact=$_POST['business_contact'];
         
         $password=$_POST['password'];
-        
+   
+// echo " $username <br>";
+// echo " $ownerfullname <br>";
+// echo " $email <br>";
+// echo " $b_contact <br>";
+// echo " $password <br>";
+
+
+
 
 $sql = "INSERT INTO owner_business (username, email, password, owner_fullname, owner_contact)
 VALUES ('$username', '$email', '$password', '$ownerfullname', '$b_contact')";
 
 if ($connection->query($sql) === TRUE) 
 {
-    header('Location: business_login.php');
+    header('Location: business_login.php'); 
+    
+
 } 
 $connection->close();
 ?>
